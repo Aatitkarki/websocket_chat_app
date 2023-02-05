@@ -99,7 +99,7 @@ class MessageListBuilder extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     String uid = ref.read(homeControllerProvider).userModel!.uid;
-    final chats = ref.read(allChatsProvider);
+    final chats = ref.watch(allChatsProvider);
     return chats.when(
         error: (error, stackTrace) => const SizedBox(),
         loading: () => const SizedBox(),

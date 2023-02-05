@@ -11,7 +11,7 @@ class WebSocketService {
   late WebSocketChannel _channel;
   bool isConnected = false;
 
-  Stream get stream => _channel.stream.asBroadcastStream();
+  Stream get stream => _channel.stream;
 
   WebSocketService();
 

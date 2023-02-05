@@ -15,7 +15,8 @@ final homeControllerProvider = Provider((ref) {
 
 final registerationStateProvider = StateProvider((ref) => false);
 
-final activeUsersPovider = StreamProvider<List<UserModel>>((ref) async* {
+final activeUsersPovider =
+    StreamProvider.autoDispose<List<UserModel>>((ref) async* {
   List<UserModel> allUsers = const <UserModel>[];
 
   await for (final message in ref.read(webSocketProvider).stream) {

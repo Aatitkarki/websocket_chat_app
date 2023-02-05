@@ -14,18 +14,6 @@ export 'app_routes.dart';
       page: ChatPage,
       path: AppRoutes.chat,
     ),
-
-    // AutoRoute(
-    //   page: DashboardWrapperPage,
-    //   children: [
-    //     AutoRoute<void>(page: DashboardPage, path: '', children: [
-    //       AutoRoute<void>(page: TeameupPage, path: AppRoutes.teamupPage),
-    //       AutoRoute<void>(page: SettingsPage, path: AppRoutes.settingsPage),
-    //       AutoRoute<void>(page: ChatPage, path: AppRoutes.chat),
-    //       AutoRoute<void>(page: ProfilePage, path: AppRoutes.profilePage),
-    //     ])
-    //   ],
-    // ),
   ],
 )
 class $AppRouter {}
