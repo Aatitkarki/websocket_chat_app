@@ -1,14 +1,15 @@
 import 'dart:async';
+import 'dart:io';
 import 'package:chat_app/config/ws_config.dart';
 import 'package:chat_app/models/message.dart';
 import 'package:chat_app/models/user_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:web_socket_channel/web_socket_channel.dart';
+import 'package:web_socket_channel/io.dart';
 
 final webSocketProvider = Provider((ref) => WebSocketService());
 
 class WebSocketService {
-  late WebSocketChannel _channel;
+  late IOWebSocketChannel _channel;
   bool isConnected = false;
 
   final streamController = StreamController.broadcast();
@@ -18,9 +19,11 @@ class WebSocketService {
   WebSocketService();
 
   startConnection() {
-    _channel = WebSocketChannel.connect(Uri.parse(WSConfig.uri));
-    streamController.add(_channel.stream);
-    isConnected = true;
+    WebSocket.connect(WSConfig.uri).then((ws) {
+      _channel = IOWebSocketChannel(ws);
+      streamController.add(_channel.stream);
+      isConnected = true;
+    });
   }
 
   void _sendWSMessage(String message) {
