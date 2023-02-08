@@ -11,17 +11,20 @@ class WebSocketService {
   late WebSocketChannel _channel;
   bool isConnected = false;
 
-  Stream get stream => _channel.stream;
+  final streamController = StreamController.broadcast();
+
+  Stream get stream => streamController.stream;
 
   WebSocketService();
 
   startConnection() {
     _channel = WebSocketChannel.connect(Uri.parse(WSConfig.uri));
+    streamController.add(_channel.stream);
     isConnected = true;
   }
 
   void _sendWSMessage(String message) {
-    if (isConnected) _channel.sink.add(message);
+    if (isConnected) streamController.sink.add(message);
   }
 
   void registerUser(UserModel userModel) {
@@ -32,13 +35,13 @@ class WebSocketService {
   void sendMessage(MessageModel messageModel) {
     String message =
         "message:${messageModel.receiverId},${messageModel.senderId},${messageModel.text}";
-    _channel.sink
+    streamController.sink
         .add("senderId:${messageModel.senderId},message:${messageModel.text}");
     _sendWSMessage(message);
   }
 
-  void listUsers() {
-    String message = "list users";
+  void listUsers(String userId) {
+    String message = "list users:$userId";
     _sendWSMessage(message);
   }
 

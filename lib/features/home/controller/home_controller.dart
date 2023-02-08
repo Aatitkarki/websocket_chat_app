@@ -54,7 +54,7 @@ class HomeController {
   _connectionStartupAndUpdateUserdata(UserModel userModel) {
     ref.read(webSocketProvider).startConnection();
     ref.read(webSocketProvider).registerUser(userModel);
-    ref.read(webSocketProvider).listUsers();
+    ref.read(webSocketProvider).listUsers(userModel.uid);
     // ref.read(allChatsProvider);
   }
 
