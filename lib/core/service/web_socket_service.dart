@@ -1,54 +1,68 @@
 import 'dart:async';
-import 'dart:io';
-import 'package:chat_app/config/ws_config.dart';
-import 'package:chat_app/models/message.dart';
-import 'package:chat_app/models/user_model.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:web_socket_channel/io.dart';
+import 'dart:convert';
+import 'dart:isolate';
 
-final webSocketProvider = Provider((ref) => WebSocketService());
+import 'package:chat_app/core/enums/ws_message_types.dart';
+import 'package:chat_app/core/models/ws_data.dart';
+import 'package:chat_app/core/models/ws_request_data.dart';
+import 'package:chat_app/core/service/web_socket_client.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:web_socket_channel/web_socket_channel.dart';
+
+import '../../models/message.dart';
+import '../../models/user_model.dart';
+
+final webSocketProvider = Provider(WebSocketService.new);
 
 class WebSocketService {
-  late IOWebSocketChannel _channel;
-  bool isConnected = false;
+  final ProviderRef ref;
+  WebSocketChannel get _socketClient =>
+      ref.read(wsClientProvider).webSocketChannel;
 
-  final streamController = StreamController.broadcast();
+  final socketResponse = StreamController<WsDataModel>.broadcast();
 
-  Stream get stream => streamController.stream;
+  WebSocketService(this.ref);
 
-  WebSocketService();
-
-  startConnection() {
-    WebSocket.connect(WSConfig.uri).then((ws) {
-      _channel = IOWebSocketChannel(ws);
-      streamController.add(_channel.stream);
-      isConnected = true;
-    });
+  void _sendWSMessage(WsRequestDataModel message) {
+    _socketClient.sink.add(jsonEncode(message.toJson()));
   }
 
-  void _sendWSMessage(String message) {
-    if (isConnected) streamController.sink.add(message);
+  void registerUser(
+    UserModel userModel,
+  ) {
+    _sendWSMessage(WsRequestDataModel(
+        type: WSMessageType.register.value, data: userModel.toJson()));
   }
 
-  void registerUser(UserModel userModel) {
-    String registerationMessage = "register:${userModel.uid},${userModel.name}";
-    _sendWSMessage(registerationMessage);
-  }
-
-  void sendMessage(MessageModel messageModel) {
-    String message =
-        "message:${messageModel.receiverId},${messageModel.senderId},${messageModel.text}";
-    streamController.sink
-        .add("senderId:${messageModel.senderId},message:${messageModel.text}");
-    _sendWSMessage(message);
+  void sendTextMessage(MessageModel messageModel) {
+    WsRequestDataModel wsRequestDataModel = WsRequestDataModel(
+        type: WSMessageType.sendText.value, data: messageModel.toJson());
+    socketResponse.sink.add(WsDataModel.message(message: messageModel));
+    // streamController.sink
+    //     .add("senderId:${messageModel.senderId},message:${messageModel.text}");
+    _sendWSMessage(wsRequestDataModel);
   }
 
   void listUsers(String userId) {
-    String message = "list users:$userId";
-    _sendWSMessage(message);
+    Map<String, dynamic> currentUserMap = {"uid": userId};
+    _sendWSMessage(WsRequestDataModel(
+        type: WSMessageType.listUser.value, data: currentUserMap));
   }
 
-  void dispose() {
-    _channel.sink.close();
+  void listenMessages() {
+    _socketClient.stream.asBroadcastStream().listen((event) {
+      try {
+        Map<String, dynamic> data = jsonDecode(event);
+        WsRequestDataModel wsRequestDataModel =
+            WsRequestDataModel.fromJson(data);
+        if (wsRequestDataModel.type == WSMessageType.activeUser.value) {
+          socketResponse.sink.add(WsDataModel.activeUsers(
+              user: UserModel.fromJson(wsRequestDataModel.data)));
+        } else if (wsRequestDataModel.type == WSMessageType.sendText.value) {
+          socketResponse.sink.add(WsDataModel.message(
+              message: MessageModel.fromJson(wsRequestDataModel.data)));
+        }
+      } catch (error) {}
+    });
   }
 }

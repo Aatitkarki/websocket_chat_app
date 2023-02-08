@@ -1,8 +1,9 @@
 import 'package:adaptive_sizer/adaptive_sizer.dart';
+import 'package:chat_app/core/providers/message_providers.dart';
+import 'package:chat_app/core/providers/registeration_provider.dart';
 import 'package:chat_app/core/service/web_socket_service.dart';
 import 'package:chat_app/core/widgets/app_error_widget.dart';
 import 'package:chat_app/features/chat/controller/chat_controller.dart';
-import 'package:chat_app/features/home/controller/home_controller.dart';
 import 'package:chat_app/models/message.dart';
 import 'package:chat_app/models/user_model.dart';
 import 'package:flutter/material.dart';
@@ -66,15 +67,14 @@ class ChatPage extends ConsumerWidget {
                   suffixIcon: IconButton(
                     icon: const Icon(Icons.send),
                     onPressed: () {
-                      String userId =
-                          ref.read(homeControllerProvider).userModel!.uid;
-                      MessageModel messageModel = MessageModel(
-                          senderId: userId,
-                          receiverId: receiverModel.uid,
-                          text: chatController.text);
+                      String userId = ref.read(registerationStateProvider).uid;
                       if (chatController.text.trim().isNotEmpty) {
+                        MessageModel messageModel = MessageModel(
+                            senderId: userId,
+                            receiverId: receiverModel.uid,
+                            text: chatController.text);
                         ref
-                            .read(chatControllerProvider)
+                            .read(messagesProvider.notifier)
                             .sendMessage(messageModel);
                       }
                     },
@@ -98,24 +98,23 @@ class MessageListBuilder extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    String uid = ref.read(homeControllerProvider).userModel!.uid;
-    final chats = ref.watch(allChatsProvider);
-    return chats.when(
-        error: (error, stackTrace) => const SizedBox(),
-        loading: () => const SizedBox(),
-        data: (allChats) {
-          return allChats.containsKey(receiverId)
-              ? ListView.builder(
-                  reverse: true,
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
-                  itemBuilder: (context, index) {
-                    return MessageBubble(
-                        message: allChats[receiverId]![index].text,
-                        isMe: allChats[receiverId]![index].receiverId == uid);
-                  })
-              : Container();
-        });
+    String uid = ref.read(registerationStateProvider).uid;
+    final allChats = ref.watch(messagesProvider);
+    int messageListIndex =
+        allChats.indexWhere((element) => element.userId == receiverId);
+    return messageListIndex != -1
+        ? ListView.builder(
+            reverse: true,
+            physics: const BouncingScrollPhysics(),
+            itemCount: allChats[messageListIndex].messages.length,
+            padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
+            itemBuilder: (context, index) {
+              return MessageBubble(
+                  message: allChats[messageListIndex].messages[index].text,
+                  isMe: allChats[messageListIndex].messages[index].senderId ==
+                      uid);
+            })
+        : Container();
   }
 }
 
