@@ -3,7 +3,6 @@ import 'package:chat_app/core/providers/message_providers.dart';
 import 'package:chat_app/core/providers/registeration_provider.dart';
 import 'package:chat_app/core/service/web_socket_service.dart';
 import 'package:chat_app/core/widgets/app_error_widget.dart';
-import 'package:chat_app/features/chat/controller/chat_controller.dart';
 import 'package:chat_app/models/message.dart';
 import 'package:chat_app/models/user_model.dart';
 import 'package:flutter/material.dart';
@@ -23,6 +22,9 @@ class ChatPage extends ConsumerWidget {
         title: Text(receiverModel.name),
         backgroundColor: Colors.blue[800],
         elevation: 0,
+        actions: [
+          IconButton(onPressed: () {}, icon: const Icon(Icons.video_call))
+        ],
       ),
       body: Column(
         children: [
@@ -76,6 +78,7 @@ class ChatPage extends ConsumerWidget {
                         ref
                             .read(messagesProvider.notifier)
                             .sendMessage(messageModel);
+                        chatController.clear();
                       }
                     },
                   ),
@@ -100,9 +103,14 @@ class MessageListBuilder extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     String uid = ref.read(registerationStateProvider).uid;
     final allChats = ref.watch(messagesProvider);
+    List<MessageModel> messages = [];
     int messageListIndex =
         allChats.indexWhere((element) => element.userId == receiverId);
-    return messageListIndex != -1
+    if (messageListIndex != -1) {
+      messages = allChats[messageListIndex].messages.reversed.toList();
+    }
+
+    return messages.isNotEmpty
         ? ListView.builder(
             reverse: true,
             physics: const BouncingScrollPhysics(),
@@ -110,9 +118,8 @@ class MessageListBuilder extends ConsumerWidget {
             padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
             itemBuilder: (context, index) {
               return MessageBubble(
-                  message: allChats[messageListIndex].messages[index].text,
-                  isMe: allChats[messageListIndex].messages[index].senderId ==
-                      uid);
+                  message: messages[index].text,
+                  isMe: messages[index].senderId == uid);
             })
         : Container();
   }

@@ -25,7 +25,10 @@ class ActiveUserProvider extends StateNotifier<List<UserModel>> {
           activeUsers: (user) {
             List<UserModel> users = state.toList();
             if (user.isOnline) {
-              users.add(user);
+              if (users.indexWhere((element) => element.uid == user.uid) ==
+                  -1) {
+                users.add(user);
+              }
             } else {
               users.removeWhere((element) => element.uid == user.uid);
             }

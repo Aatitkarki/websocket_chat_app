@@ -6,6 +6,7 @@ import 'package:chat_app/core/enums/ws_message_types.dart';
 import 'package:chat_app/core/models/ws_data.dart';
 import 'package:chat_app/core/models/ws_request_data.dart';
 import 'package:chat_app/core/service/web_socket_client.dart';
+import 'package:chat_app/models/rtc_candidate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
@@ -38,8 +39,6 @@ class WebSocketService {
     WsRequestDataModel wsRequestDataModel = WsRequestDataModel(
         type: WSMessageType.sendText.value, data: messageModel.toJson());
     socketResponse.sink.add(WsDataModel.message(message: messageModel));
-    // streamController.sink
-    //     .add("senderId:${messageModel.senderId},message:${messageModel.text}");
     _sendWSMessage(wsRequestDataModel);
   }
 
@@ -47,6 +46,11 @@ class WebSocketService {
     Map<String, dynamic> currentUserMap = {"uid": userId};
     _sendWSMessage(WsRequestDataModel(
         type: WSMessageType.listUser.value, data: currentUserMap));
+  }
+
+  void startVideoCall(RtcCandidateModel rtcCandidateModel) {
+    _sendWSMessage(WsRequestDataModel(
+        type: WSMessageType.videoCall.value, data: rtcCandidateModel.toJson()));
   }
 
   void listenMessages() {
@@ -62,7 +66,9 @@ class WebSocketService {
           socketResponse.sink.add(WsDataModel.message(
               message: MessageModel.fromJson(wsRequestDataModel.data)));
         }
-      } catch (error) {}
+      } catch (error) {
+        print("$error");
+      }
     });
   }
 }

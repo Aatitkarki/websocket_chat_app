@@ -5,13 +5,14 @@ import 'package:chat_app/core/routes/app_router.gr.dart';
 import 'package:chat_app/core/service/web_socket_service.dart';
 import 'package:chat_app/core/widgets/app_error_widget.dart';
 import 'package:chat_app/core/widgets/custom_button.dart';
-import 'package:chat_app/features/chat/controller/chat_controller.dart';
+import 'package:chat_app/models/user_message_list.dart';
 import 'package:chat_app/models/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/constants/constants.dart';
 import '../../../core/providers/active_users_data_provider.dart';
+import '../../../core/providers/message_providers.dart';
 import '../../../core/providers/registeration_provider.dart';
 import '../../../core/themes/theme.dart';
 import '../../../core/widgets/textform_field_widget.dart';
@@ -47,6 +48,10 @@ class _HomePageState extends ConsumerState<HomePage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text("${AppStrings.registeredAs} ${registerationData.name}"),
+                  Text(
+                    "User ID: ${registerationData.uid}",
+                    style: AppStyles.text10PxBold,
+                  ),
                   10.verticalSpace,
                   Text(
                     AppStrings.activeUsers,
@@ -85,12 +90,12 @@ class _ActiveUserListBuilderWidgetState
   void initState() {
     ref.read(activeUsersProvider.notifier).registerWSUser();
     ref.read(activeUsersProvider.notifier).listenActiveUsers();
-
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    final allChats = ref.watch(messagesProvider);
     users = ref.watch(activeUsersProvider);
     return users.isEmpty
         ? const AppErrorWidget(message: 'No Active Users to chat')
@@ -100,6 +105,9 @@ class _ActiveUserListBuilderWidgetState
             itemCount: users.length,
             itemBuilder: (context, index) {
               final userModel = users[index];
+              UserMessageListModel userMessageListModel = allChats.singleWhere(
+                  (element) => element.userId == userModel.uid,
+                  orElse: () => UserMessageListModel(userId: userModel.uid));
               return GestureDetector(
                 onTap: () {
                   context.router.push(ChatRoute(
@@ -120,9 +128,20 @@ class _ActiveUserListBuilderWidgetState
                           ),
                         ),
                         10.horizontalSpace,
-                        Text(
-                          userModel.name,
-                          style: AppStyles.text13PxBold,
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              userModel.name,
+                              style: AppStyles.text13PxBold,
+                            ),
+                            Text(
+                              userMessageListModel.messages.isEmpty
+                                  ? ''
+                                  : userMessageListModel.messages.last.text,
+                              style: AppStyles.text12Px,
+                            )
+                          ],
                         ),
                       ],
                     ),

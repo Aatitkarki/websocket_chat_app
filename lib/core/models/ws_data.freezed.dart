@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of '../../models/ws_data.dart';
+part of 'ws_data.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -20,18 +20,22 @@ mixin _$WsDataModel {
   TResult when<TResult extends Object?>({
     required TResult Function(UserModel user) activeUsers,
     required TResult Function(MessageModel message) message,
+    required TResult Function(RTCIceCandidate rtcIceCandidate)
+        incomingVideoCall,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(UserModel user)? activeUsers,
     TResult? Function(MessageModel message)? message,
+    TResult? Function(RTCIceCandidate rtcIceCandidate)? incomingVideoCall,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(UserModel user)? activeUsers,
     TResult Function(MessageModel message)? message,
+    TResult Function(RTCIceCandidate rtcIceCandidate)? incomingVideoCall,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -39,18 +43,21 @@ mixin _$WsDataModel {
   TResult map<TResult extends Object?>({
     required TResult Function(_ActiveUsers value) activeUsers,
     required TResult Function(_Message value) message,
+    required TResult Function(_IncomingVideoCall value) incomingVideoCall,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_ActiveUsers value)? activeUsers,
     TResult? Function(_Message value)? message,
+    TResult? Function(_IncomingVideoCall value)? incomingVideoCall,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_ActiveUsers value)? activeUsers,
     TResult Function(_Message value)? message,
+    TResult Function(_IncomingVideoCall value)? incomingVideoCall,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -150,6 +157,8 @@ class _$_ActiveUsers implements _ActiveUsers {
   TResult when<TResult extends Object?>({
     required TResult Function(UserModel user) activeUsers,
     required TResult Function(MessageModel message) message,
+    required TResult Function(RTCIceCandidate rtcIceCandidate)
+        incomingVideoCall,
   }) {
     return activeUsers(user);
   }
@@ -159,6 +168,7 @@ class _$_ActiveUsers implements _ActiveUsers {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(UserModel user)? activeUsers,
     TResult? Function(MessageModel message)? message,
+    TResult? Function(RTCIceCandidate rtcIceCandidate)? incomingVideoCall,
   }) {
     return activeUsers?.call(user);
   }
@@ -168,6 +178,7 @@ class _$_ActiveUsers implements _ActiveUsers {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(UserModel user)? activeUsers,
     TResult Function(MessageModel message)? message,
+    TResult Function(RTCIceCandidate rtcIceCandidate)? incomingVideoCall,
     required TResult orElse(),
   }) {
     if (activeUsers != null) {
@@ -181,6 +192,7 @@ class _$_ActiveUsers implements _ActiveUsers {
   TResult map<TResult extends Object?>({
     required TResult Function(_ActiveUsers value) activeUsers,
     required TResult Function(_Message value) message,
+    required TResult Function(_IncomingVideoCall value) incomingVideoCall,
   }) {
     return activeUsers(this);
   }
@@ -190,6 +202,7 @@ class _$_ActiveUsers implements _ActiveUsers {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_ActiveUsers value)? activeUsers,
     TResult? Function(_Message value)? message,
+    TResult? Function(_IncomingVideoCall value)? incomingVideoCall,
   }) {
     return activeUsers?.call(this);
   }
@@ -199,6 +212,7 @@ class _$_ActiveUsers implements _ActiveUsers {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_ActiveUsers value)? activeUsers,
     TResult Function(_Message value)? message,
+    TResult Function(_IncomingVideoCall value)? incomingVideoCall,
     required TResult orElse(),
   }) {
     if (activeUsers != null) {
@@ -292,6 +306,8 @@ class _$_Message implements _Message {
   TResult when<TResult extends Object?>({
     required TResult Function(UserModel user) activeUsers,
     required TResult Function(MessageModel message) message,
+    required TResult Function(RTCIceCandidate rtcIceCandidate)
+        incomingVideoCall,
   }) {
     return message(this.message);
   }
@@ -301,6 +317,7 @@ class _$_Message implements _Message {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(UserModel user)? activeUsers,
     TResult? Function(MessageModel message)? message,
+    TResult? Function(RTCIceCandidate rtcIceCandidate)? incomingVideoCall,
   }) {
     return message?.call(this.message);
   }
@@ -310,6 +327,7 @@ class _$_Message implements _Message {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(UserModel user)? activeUsers,
     TResult Function(MessageModel message)? message,
+    TResult Function(RTCIceCandidate rtcIceCandidate)? incomingVideoCall,
     required TResult orElse(),
   }) {
     if (message != null) {
@@ -323,6 +341,7 @@ class _$_Message implements _Message {
   TResult map<TResult extends Object?>({
     required TResult Function(_ActiveUsers value) activeUsers,
     required TResult Function(_Message value) message,
+    required TResult Function(_IncomingVideoCall value) incomingVideoCall,
   }) {
     return message(this);
   }
@@ -332,6 +351,7 @@ class _$_Message implements _Message {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_ActiveUsers value)? activeUsers,
     TResult? Function(_Message value)? message,
+    TResult? Function(_IncomingVideoCall value)? incomingVideoCall,
   }) {
     return message?.call(this);
   }
@@ -341,6 +361,7 @@ class _$_Message implements _Message {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_ActiveUsers value)? activeUsers,
     TResult Function(_Message value)? message,
+    TResult Function(_IncomingVideoCall value)? incomingVideoCall,
     required TResult orElse(),
   }) {
     if (message != null) {
@@ -356,5 +377,148 @@ abstract class _Message implements WsDataModel {
   MessageModel get message;
   @JsonKey(ignore: true)
   _$$_MessageCopyWith<_$_Message> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_IncomingVideoCallCopyWith<$Res> {
+  factory _$$_IncomingVideoCallCopyWith(_$_IncomingVideoCall value,
+          $Res Function(_$_IncomingVideoCall) then) =
+      __$$_IncomingVideoCallCopyWithImpl<$Res>;
+  @useResult
+  $Res call({RTCIceCandidate rtcIceCandidate});
+}
+
+/// @nodoc
+class __$$_IncomingVideoCallCopyWithImpl<$Res>
+    extends _$WsDataModelCopyWithImpl<$Res, _$_IncomingVideoCall>
+    implements _$$_IncomingVideoCallCopyWith<$Res> {
+  __$$_IncomingVideoCallCopyWithImpl(
+      _$_IncomingVideoCall _value, $Res Function(_$_IncomingVideoCall) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? rtcIceCandidate = null,
+  }) {
+    return _then(_$_IncomingVideoCall(
+      rtcIceCandidate: null == rtcIceCandidate
+          ? _value.rtcIceCandidate
+          : rtcIceCandidate // ignore: cast_nullable_to_non_nullable
+              as RTCIceCandidate,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_IncomingVideoCall implements _IncomingVideoCall {
+  const _$_IncomingVideoCall({required this.rtcIceCandidate});
+
+  @override
+  final RTCIceCandidate rtcIceCandidate;
+
+  @override
+  String toString() {
+    return 'WsDataModel.incomingVideoCall(rtcIceCandidate: $rtcIceCandidate)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_IncomingVideoCall &&
+            (identical(other.rtcIceCandidate, rtcIceCandidate) ||
+                other.rtcIceCandidate == rtcIceCandidate));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, rtcIceCandidate);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_IncomingVideoCallCopyWith<_$_IncomingVideoCall> get copyWith =>
+      __$$_IncomingVideoCallCopyWithImpl<_$_IncomingVideoCall>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(UserModel user) activeUsers,
+    required TResult Function(MessageModel message) message,
+    required TResult Function(RTCIceCandidate rtcIceCandidate)
+        incomingVideoCall,
+  }) {
+    return incomingVideoCall(rtcIceCandidate);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(UserModel user)? activeUsers,
+    TResult? Function(MessageModel message)? message,
+    TResult? Function(RTCIceCandidate rtcIceCandidate)? incomingVideoCall,
+  }) {
+    return incomingVideoCall?.call(rtcIceCandidate);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(UserModel user)? activeUsers,
+    TResult Function(MessageModel message)? message,
+    TResult Function(RTCIceCandidate rtcIceCandidate)? incomingVideoCall,
+    required TResult orElse(),
+  }) {
+    if (incomingVideoCall != null) {
+      return incomingVideoCall(rtcIceCandidate);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_ActiveUsers value) activeUsers,
+    required TResult Function(_Message value) message,
+    required TResult Function(_IncomingVideoCall value) incomingVideoCall,
+  }) {
+    return incomingVideoCall(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_ActiveUsers value)? activeUsers,
+    TResult? Function(_Message value)? message,
+    TResult? Function(_IncomingVideoCall value)? incomingVideoCall,
+  }) {
+    return incomingVideoCall?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_ActiveUsers value)? activeUsers,
+    TResult Function(_Message value)? message,
+    TResult Function(_IncomingVideoCall value)? incomingVideoCall,
+    required TResult orElse(),
+  }) {
+    if (incomingVideoCall != null) {
+      return incomingVideoCall(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _IncomingVideoCall implements WsDataModel {
+  const factory _IncomingVideoCall(
+      {required final RTCIceCandidate rtcIceCandidate}) = _$_IncomingVideoCall;
+
+  RTCIceCandidate get rtcIceCandidate;
+  @JsonKey(ignore: true)
+  _$$_IncomingVideoCallCopyWith<_$_IncomingVideoCall> get copyWith =>
       throw _privateConstructorUsedError;
 }
