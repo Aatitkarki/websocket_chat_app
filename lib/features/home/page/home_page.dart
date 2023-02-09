@@ -1,6 +1,8 @@
 import 'package:adaptive_sizer/adaptive_sizer.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:chat_app/core/extensions/extensions.dart';
+import 'package:chat_app/core/providers/state/video_call_state.dart';
+import 'package:chat_app/core/providers/video_data_provider.dart';
 import 'package:chat_app/core/routes/app_router.gr.dart';
 import 'package:chat_app/core/service/web_socket_service.dart';
 import 'package:chat_app/core/widgets/app_error_widget.dart';
@@ -95,6 +97,15 @@ class _ActiveUserListBuilderWidgetState
 
   @override
   Widget build(BuildContext context) {
+    ref.listen<VideoCallState>(videoDataProvider, (previous, next) {
+      next.mapOrNull(
+        incomingVideoCall: (value) {
+          context.router.push(VideoCallRoute(
+              isCaller: false,
+              incomingCallerDesModel: value.callerDescriptionModel));
+        },
+      );
+    });
     final allChats = ref.watch(messagesProvider);
     users = ref.watch(activeUsersProvider);
     return users.isEmpty

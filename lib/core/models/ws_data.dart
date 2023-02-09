@@ -1,3 +1,4 @@
+import 'package:chat_app/models/caller_description.dart';
 import 'package:chat_app/models/message.dart';
 import 'package:chat_app/models/user_model.dart';
 import 'package:flutter_webrtc/flutter_webrtc.dart';
@@ -11,5 +12,10 @@ class WsDataModel with _$WsDataModel {
   const factory WsDataModel.message({required MessageModel message}) = _Message;
 
   const factory WsDataModel.incomingVideoCall(
-      {required RTCIceCandidate rtcIceCandidate}) = _IncomingVideoCall;
+          {required CallerDescriptionModel callerDescriptionModel}) =
+      _IncomingVideoCall;
+
+  // const factory WsDataModel.incomingVideoCall(
+  //         {required CallerDescriptionModel callerDescriptionModel}) =
+  //     _IncomingVideoCall;
 }

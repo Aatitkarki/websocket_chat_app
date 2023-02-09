@@ -1,5 +1,9 @@
 import 'dart:convert';
 
+import 'package:chat_app/core/providers/registeration_provider.dart';
+import 'package:chat_app/core/providers/video_data_provider.dart';
+import 'package:chat_app/models/caller_description.dart';
+import 'package:chat_app/models/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_webrtc/flutter_webrtc.dart';
@@ -7,10 +11,11 @@ import 'package:sdp_transform/sdp_transform.dart';
 
 class VideoCallPage extends ConsumerStatefulWidget {
   final bool isCaller;
-  final String receiverId;
+  final String? receiverId;
+  final CallerDescriptionModel incomingCallerDesModel;
 
-  const VideoCallPage(
-      {required this.receiverId, this.isCaller = true, super.key});
+  const VideoCallPage(this.incomingCallerDesModel,
+      {this.receiverId, this.isCaller = true, super.key});
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() => _VideoCallPageState();
@@ -90,16 +95,23 @@ class _VideoCallPageState extends ConsumerState<VideoCallPage> {
     return pc;
   }
 
-  void _createOffer() async {
+  void _startCall() async {
     RTCSessionDescription description =
         await _peerConnection!.createOffer({'offerToReceiveVideo': 1});
-    var session = parse(description.sdp.toString());
-    print(json.encode(session));
+    Map<String, dynamic> sessionDescriptionProtocol =
+        parse(description.sdp.toString());
     _offer = true;
-
     _peerConnection!.setLocalDescription(description);
+    UserModel caller = ref.read(registerationStateProvider);
+    CallerDescriptionModel callerDescriptionModel = CallerDescriptionModel(
+        callerId: caller.uid,
+        callerName: caller.name,
+        receiverId: widget.receiverId!,
+        sdp: sessionDescriptionProtocol);
+    ref.read(videoDataProvider.notifier).startVideoCall(callerDescriptionModel);
   }
 
+//TOOD: USE ANSWER BUTTON
   void _createAnswer() async {
     RTCSessionDescription description =
         await _peerConnection!.createAnswer({'offerToReceiveVideo': 1});
@@ -111,16 +123,13 @@ class _VideoCallPageState extends ConsumerState<VideoCallPage> {
   }
 
   void _setRemoteDescription() async {
-    String jsonString = sdpController.text;
-    dynamic session = await jsonDecode(jsonString);
-
-    String sdp = write(session, null);
+    String sdp = write(widget.incomingCallerDesModel.sdp, null);
 
     RTCSessionDescription description =
         RTCSessionDescription(sdp, _offer ? 'answer' : 'offer');
-    print(description.toMap());
 
     await _peerConnection!.setRemoteDescription(description);
+    // _createAnswer();
   }
 
   void _addCandidate() async {
@@ -135,9 +144,13 @@ class _VideoCallPageState extends ConsumerState<VideoCallPage> {
   @override
   void initState() {
     initRenderer();
-    _createPeerConnecion().then((pc) {
-      _peerConnection = pc;
-    });
+    if (widget.isCaller) {
+      _createPeerConnecion().then((pc) {
+        _peerConnection = pc;
+      });
+    } else {
+      _setRemoteDescription();
+    }
     // _getUserMedia();
     super.initState();
   }
@@ -198,7 +211,7 @@ class _VideoCallPageState extends ConsumerState<VideoCallPage> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     ElevatedButton(
-                      onPressed: _createOffer,
+                      onPressed: _startCall,
                       child: const Text("Offer"),
                     ),
                     const SizedBox(

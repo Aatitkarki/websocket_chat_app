@@ -15,6 +15,7 @@ import 'package:auto_route/auto_route.dart' as _i4;
 import 'package:chat_app/features/call/page/video_call_page.dart' as _i3;
 import 'package:chat_app/features/chat/page/chat_page.dart' as _i2;
 import 'package:chat_app/features/home/page/home_page.dart' as _i1;
+import 'package:chat_app/models/caller_description.dart' as _i7;
 import 'package:chat_app/models/user_model.dart' as _i6;
 import 'package:flutter/material.dart' as _i5;
 
@@ -41,9 +42,15 @@ class AppRouter extends _i4.RootStackRouter {
       );
     },
     VideoCallRoute.name: (routeData) {
+      final args = routeData.argsAs<VideoCallRouteArgs>();
       return _i4.AdaptivePage<dynamic>(
         routeData: routeData,
-        child: const _i3.VideoCallPage(),
+        child: _i3.VideoCallPage(
+          args.incomingCallerDesModel,
+          receiverId: args.receiverId,
+          isCaller: args.isCaller,
+          key: args.key,
+        ),
       );
     },
   };
@@ -119,12 +126,44 @@ class ChatRouteArgs {
 
 /// generated route for
 /// [_i3.VideoCallPage]
-class VideoCallRoute extends _i4.PageRouteInfo<void> {
-  const VideoCallRoute()
-      : super(
+class VideoCallRoute extends _i4.PageRouteInfo<VideoCallRouteArgs> {
+  VideoCallRoute({
+    required _i7.CallerDescriptionModel incomingCallerDesModel,
+    String? receiverId,
+    bool isCaller = true,
+    _i5.Key? key,
+  }) : super(
           VideoCallRoute.name,
           path: '/videoCall',
+          args: VideoCallRouteArgs(
+            incomingCallerDesModel: incomingCallerDesModel,
+            receiverId: receiverId,
+            isCaller: isCaller,
+            key: key,
+          ),
         );
 
   static const String name = 'VideoCallRoute';
+}
+
+class VideoCallRouteArgs {
+  const VideoCallRouteArgs({
+    required this.incomingCallerDesModel,
+    this.receiverId,
+    this.isCaller = true,
+    this.key,
+  });
+
+  final _i7.CallerDescriptionModel incomingCallerDesModel;
+
+  final String? receiverId;
+
+  final bool isCaller;
+
+  final _i5.Key? key;
+
+  @override
+  String toString() {
+    return 'VideoCallRouteArgs{incomingCallerDesModel: $incomingCallerDesModel, receiverId: $receiverId, isCaller: $isCaller, key: $key}';
+  }
 }

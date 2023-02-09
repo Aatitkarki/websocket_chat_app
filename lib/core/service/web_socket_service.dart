@@ -6,7 +6,7 @@ import 'package:chat_app/core/enums/ws_message_types.dart';
 import 'package:chat_app/core/models/ws_data.dart';
 import 'package:chat_app/core/models/ws_request_data.dart';
 import 'package:chat_app/core/service/web_socket_client.dart';
-import 'package:chat_app/models/rtc_candidate.dart';
+import 'package:chat_app/models/caller_description.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
@@ -48,9 +48,10 @@ class WebSocketService {
         type: WSMessageType.listUser.value, data: currentUserMap));
   }
 
-  void startVideoCall(RtcCandidateModel rtcCandidateModel) {
+  void startVideoCall(CallerDescriptionModel callerDescriptionModel) {
     _sendWSMessage(WsRequestDataModel(
-        type: WSMessageType.videoCall.value, data: rtcCandidateModel.toJson()));
+        type: WSMessageType.videoCallStarted.value,
+        data: callerDescriptionModel.toJson()));
   }
 
   void listenMessages() {
@@ -65,6 +66,16 @@ class WebSocketService {
         } else if (wsRequestDataModel.type == WSMessageType.sendText.value) {
           socketResponse.sink.add(WsDataModel.message(
               message: MessageModel.fromJson(wsRequestDataModel.data)));
+        } else if (wsRequestDataModel.type ==
+            WSMessageType.videoCallStarted.value) {
+          socketResponse.sink.add(WsDataModel.incomingVideoCall(
+              callerDescriptionModel:
+                  CallerDescriptionModel.fromJson(wsRequestDataModel.data)));
+        } else if (wsRequestDataModel.type ==
+            WSMessageType.videoCallAccepted.value) {
+          socketResponse.sink.add(WsDataModel.incomingVideoCall(
+              callerDescriptionModel:
+                  CallerDescriptionModel.fromJson(wsRequestDataModel.data)));
         }
       } catch (error) {
         print("$error");
