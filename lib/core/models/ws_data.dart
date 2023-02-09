@@ -15,6 +15,14 @@ class WsDataModel with _$WsDataModel {
           {required CallerDescriptionModel callerDescriptionModel}) =
       _IncomingVideoCall;
 
+  const factory WsDataModel.acceptedVideoCall(
+          {required CallerDescriptionModel receiverDescriptionModel}) =
+      _AcceptedVideoCall;
+
+  const factory WsDataModel.rejectedVideoCall() = _RejectedVideoCall;
+
+  const factory WsDataModel.endedVideoCall() = _EndedVideoCall;
+
   // const factory WsDataModel.incomingVideoCall(
   //         {required CallerDescriptionModel callerDescriptionModel}) =
   //     _IncomingVideoCall;

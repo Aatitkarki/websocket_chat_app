@@ -12,7 +12,7 @@ _$_CallerDescriptionModel _$$_CallerDescriptionModelFromJson(
       receiverId: json['receiverId'] as String,
       callerId: json['callerId'] as String,
       callerName: json['callerName'] as String,
-      sdp: json['sdp'] as Map<String, dynamic>,
+      sdp: json['sdp'] as String,
     );
 
 Map<String, dynamic> _$$_CallerDescriptionModelToJson(

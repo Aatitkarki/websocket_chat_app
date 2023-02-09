@@ -24,7 +24,7 @@ mixin _$CallerDescriptionModel {
   String get receiverId => throw _privateConstructorUsedError;
   String get callerId => throw _privateConstructorUsedError;
   String get callerName => throw _privateConstructorUsedError;
-  Map<String, dynamic> get sdp => throw _privateConstructorUsedError;
+  String get sdp => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -39,10 +39,7 @@ abstract class $CallerDescriptionModelCopyWith<$Res> {
       _$CallerDescriptionModelCopyWithImpl<$Res, CallerDescriptionModel>;
   @useResult
   $Res call(
-      {String receiverId,
-      String callerId,
-      String callerName,
-      Map<String, dynamic> sdp});
+      {String receiverId, String callerId, String callerName, String sdp});
 }
 
 /// @nodoc
@@ -80,7 +77,7 @@ class _$CallerDescriptionModelCopyWithImpl<$Res,
       sdp: null == sdp
           ? _value.sdp
           : sdp // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>,
+              as String,
     ) as $Val);
   }
 }
@@ -94,10 +91,7 @@ abstract class _$$_CallerDescriptionModelCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String receiverId,
-      String callerId,
-      String callerName,
-      Map<String, dynamic> sdp});
+      {String receiverId, String callerId, String callerName, String sdp});
 }
 
 /// @nodoc
@@ -131,9 +125,9 @@ class __$$_CallerDescriptionModelCopyWithImpl<$Res>
           : callerName // ignore: cast_nullable_to_non_nullable
               as String,
       sdp: null == sdp
-          ? _value._sdp
+          ? _value.sdp
           : sdp // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>,
+              as String,
     ));
   }
 }
@@ -145,9 +139,8 @@ class _$_CallerDescriptionModel extends _CallerDescriptionModel {
       {required this.receiverId,
       required this.callerId,
       required this.callerName,
-      required final Map<String, dynamic> sdp})
-      : _sdp = sdp,
-        super._();
+      required this.sdp})
+      : super._();
 
   factory _$_CallerDescriptionModel.fromJson(Map<String, dynamic> json) =>
       _$$_CallerDescriptionModelFromJson(json);
@@ -158,13 +151,8 @@ class _$_CallerDescriptionModel extends _CallerDescriptionModel {
   final String callerId;
   @override
   final String callerName;
-  final Map<String, dynamic> _sdp;
   @override
-  Map<String, dynamic> get sdp {
-    if (_sdp is EqualUnmodifiableMapView) return _sdp;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableMapView(_sdp);
-  }
+  final String sdp;
 
   @override
   String toString() {
@@ -182,13 +170,13 @@ class _$_CallerDescriptionModel extends _CallerDescriptionModel {
                 other.callerId == callerId) &&
             (identical(other.callerName, callerName) ||
                 other.callerName == callerName) &&
-            const DeepCollectionEquality().equals(other._sdp, _sdp));
+            (identical(other.sdp, sdp) || other.sdp == sdp));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, receiverId, callerId, callerName,
-      const DeepCollectionEquality().hash(_sdp));
+  int get hashCode =>
+      Object.hash(runtimeType, receiverId, callerId, callerName, sdp);
 
   @JsonKey(ignore: true)
   @override
@@ -210,7 +198,7 @@ abstract class _CallerDescriptionModel extends CallerDescriptionModel {
       {required final String receiverId,
       required final String callerId,
       required final String callerName,
-      required final Map<String, dynamic> sdp}) = _$_CallerDescriptionModel;
+      required final String sdp}) = _$_CallerDescriptionModel;
   const _CallerDescriptionModel._() : super._();
 
   factory _CallerDescriptionModel.fromJson(Map<String, dynamic> json) =
@@ -223,7 +211,7 @@ abstract class _CallerDescriptionModel extends CallerDescriptionModel {
   @override
   String get callerName;
   @override
-  Map<String, dynamic> get sdp;
+  String get sdp;
   @override
   @JsonKey(ignore: true)
   _$$_CallerDescriptionModelCopyWith<_$_CallerDescriptionModel> get copyWith =>

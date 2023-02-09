@@ -22,6 +22,10 @@ mixin _$WsDataModel {
     required TResult Function(MessageModel message) message,
     required TResult Function(CallerDescriptionModel callerDescriptionModel)
         incomingVideoCall,
+    required TResult Function(CallerDescriptionModel receiverDescriptionModel)
+        acceptedVideoCall,
+    required TResult Function() rejectedVideoCall,
+    required TResult Function() endedVideoCall,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -30,6 +34,10 @@ mixin _$WsDataModel {
     TResult? Function(MessageModel message)? message,
     TResult? Function(CallerDescriptionModel callerDescriptionModel)?
         incomingVideoCall,
+    TResult? Function(CallerDescriptionModel receiverDescriptionModel)?
+        acceptedVideoCall,
+    TResult? Function()? rejectedVideoCall,
+    TResult? Function()? endedVideoCall,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -38,6 +46,10 @@ mixin _$WsDataModel {
     TResult Function(MessageModel message)? message,
     TResult Function(CallerDescriptionModel callerDescriptionModel)?
         incomingVideoCall,
+    TResult Function(CallerDescriptionModel receiverDescriptionModel)?
+        acceptedVideoCall,
+    TResult Function()? rejectedVideoCall,
+    TResult Function()? endedVideoCall,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -46,6 +58,9 @@ mixin _$WsDataModel {
     required TResult Function(_ActiveUsers value) activeUsers,
     required TResult Function(_Message value) message,
     required TResult Function(_IncomingVideoCall value) incomingVideoCall,
+    required TResult Function(_AcceptedVideoCall value) acceptedVideoCall,
+    required TResult Function(_RejectedVideoCall value) rejectedVideoCall,
+    required TResult Function(_EndedVideoCall value) endedVideoCall,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -53,6 +68,9 @@ mixin _$WsDataModel {
     TResult? Function(_ActiveUsers value)? activeUsers,
     TResult? Function(_Message value)? message,
     TResult? Function(_IncomingVideoCall value)? incomingVideoCall,
+    TResult? Function(_AcceptedVideoCall value)? acceptedVideoCall,
+    TResult? Function(_RejectedVideoCall value)? rejectedVideoCall,
+    TResult? Function(_EndedVideoCall value)? endedVideoCall,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -60,6 +78,9 @@ mixin _$WsDataModel {
     TResult Function(_ActiveUsers value)? activeUsers,
     TResult Function(_Message value)? message,
     TResult Function(_IncomingVideoCall value)? incomingVideoCall,
+    TResult Function(_AcceptedVideoCall value)? acceptedVideoCall,
+    TResult Function(_RejectedVideoCall value)? rejectedVideoCall,
+    TResult Function(_EndedVideoCall value)? endedVideoCall,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -161,6 +182,10 @@ class _$_ActiveUsers implements _ActiveUsers {
     required TResult Function(MessageModel message) message,
     required TResult Function(CallerDescriptionModel callerDescriptionModel)
         incomingVideoCall,
+    required TResult Function(CallerDescriptionModel receiverDescriptionModel)
+        acceptedVideoCall,
+    required TResult Function() rejectedVideoCall,
+    required TResult Function() endedVideoCall,
   }) {
     return activeUsers(user);
   }
@@ -172,6 +197,10 @@ class _$_ActiveUsers implements _ActiveUsers {
     TResult? Function(MessageModel message)? message,
     TResult? Function(CallerDescriptionModel callerDescriptionModel)?
         incomingVideoCall,
+    TResult? Function(CallerDescriptionModel receiverDescriptionModel)?
+        acceptedVideoCall,
+    TResult? Function()? rejectedVideoCall,
+    TResult? Function()? endedVideoCall,
   }) {
     return activeUsers?.call(user);
   }
@@ -183,6 +212,10 @@ class _$_ActiveUsers implements _ActiveUsers {
     TResult Function(MessageModel message)? message,
     TResult Function(CallerDescriptionModel callerDescriptionModel)?
         incomingVideoCall,
+    TResult Function(CallerDescriptionModel receiverDescriptionModel)?
+        acceptedVideoCall,
+    TResult Function()? rejectedVideoCall,
+    TResult Function()? endedVideoCall,
     required TResult orElse(),
   }) {
     if (activeUsers != null) {
@@ -197,6 +230,9 @@ class _$_ActiveUsers implements _ActiveUsers {
     required TResult Function(_ActiveUsers value) activeUsers,
     required TResult Function(_Message value) message,
     required TResult Function(_IncomingVideoCall value) incomingVideoCall,
+    required TResult Function(_AcceptedVideoCall value) acceptedVideoCall,
+    required TResult Function(_RejectedVideoCall value) rejectedVideoCall,
+    required TResult Function(_EndedVideoCall value) endedVideoCall,
   }) {
     return activeUsers(this);
   }
@@ -207,6 +243,9 @@ class _$_ActiveUsers implements _ActiveUsers {
     TResult? Function(_ActiveUsers value)? activeUsers,
     TResult? Function(_Message value)? message,
     TResult? Function(_IncomingVideoCall value)? incomingVideoCall,
+    TResult? Function(_AcceptedVideoCall value)? acceptedVideoCall,
+    TResult? Function(_RejectedVideoCall value)? rejectedVideoCall,
+    TResult? Function(_EndedVideoCall value)? endedVideoCall,
   }) {
     return activeUsers?.call(this);
   }
@@ -217,6 +256,9 @@ class _$_ActiveUsers implements _ActiveUsers {
     TResult Function(_ActiveUsers value)? activeUsers,
     TResult Function(_Message value)? message,
     TResult Function(_IncomingVideoCall value)? incomingVideoCall,
+    TResult Function(_AcceptedVideoCall value)? acceptedVideoCall,
+    TResult Function(_RejectedVideoCall value)? rejectedVideoCall,
+    TResult Function(_EndedVideoCall value)? endedVideoCall,
     required TResult orElse(),
   }) {
     if (activeUsers != null) {
@@ -312,6 +354,10 @@ class _$_Message implements _Message {
     required TResult Function(MessageModel message) message,
     required TResult Function(CallerDescriptionModel callerDescriptionModel)
         incomingVideoCall,
+    required TResult Function(CallerDescriptionModel receiverDescriptionModel)
+        acceptedVideoCall,
+    required TResult Function() rejectedVideoCall,
+    required TResult Function() endedVideoCall,
   }) {
     return message(this.message);
   }
@@ -323,6 +369,10 @@ class _$_Message implements _Message {
     TResult? Function(MessageModel message)? message,
     TResult? Function(CallerDescriptionModel callerDescriptionModel)?
         incomingVideoCall,
+    TResult? Function(CallerDescriptionModel receiverDescriptionModel)?
+        acceptedVideoCall,
+    TResult? Function()? rejectedVideoCall,
+    TResult? Function()? endedVideoCall,
   }) {
     return message?.call(this.message);
   }
@@ -334,6 +384,10 @@ class _$_Message implements _Message {
     TResult Function(MessageModel message)? message,
     TResult Function(CallerDescriptionModel callerDescriptionModel)?
         incomingVideoCall,
+    TResult Function(CallerDescriptionModel receiverDescriptionModel)?
+        acceptedVideoCall,
+    TResult Function()? rejectedVideoCall,
+    TResult Function()? endedVideoCall,
     required TResult orElse(),
   }) {
     if (message != null) {
@@ -348,6 +402,9 @@ class _$_Message implements _Message {
     required TResult Function(_ActiveUsers value) activeUsers,
     required TResult Function(_Message value) message,
     required TResult Function(_IncomingVideoCall value) incomingVideoCall,
+    required TResult Function(_AcceptedVideoCall value) acceptedVideoCall,
+    required TResult Function(_RejectedVideoCall value) rejectedVideoCall,
+    required TResult Function(_EndedVideoCall value) endedVideoCall,
   }) {
     return message(this);
   }
@@ -358,6 +415,9 @@ class _$_Message implements _Message {
     TResult? Function(_ActiveUsers value)? activeUsers,
     TResult? Function(_Message value)? message,
     TResult? Function(_IncomingVideoCall value)? incomingVideoCall,
+    TResult? Function(_AcceptedVideoCall value)? acceptedVideoCall,
+    TResult? Function(_RejectedVideoCall value)? rejectedVideoCall,
+    TResult? Function(_EndedVideoCall value)? endedVideoCall,
   }) {
     return message?.call(this);
   }
@@ -368,6 +428,9 @@ class _$_Message implements _Message {
     TResult Function(_ActiveUsers value)? activeUsers,
     TResult Function(_Message value)? message,
     TResult Function(_IncomingVideoCall value)? incomingVideoCall,
+    TResult Function(_AcceptedVideoCall value)? acceptedVideoCall,
+    TResult Function(_RejectedVideoCall value)? rejectedVideoCall,
+    TResult Function(_EndedVideoCall value)? endedVideoCall,
     required TResult orElse(),
   }) {
     if (message != null) {
@@ -467,6 +530,10 @@ class _$_IncomingVideoCall implements _IncomingVideoCall {
     required TResult Function(MessageModel message) message,
     required TResult Function(CallerDescriptionModel callerDescriptionModel)
         incomingVideoCall,
+    required TResult Function(CallerDescriptionModel receiverDescriptionModel)
+        acceptedVideoCall,
+    required TResult Function() rejectedVideoCall,
+    required TResult Function() endedVideoCall,
   }) {
     return incomingVideoCall(callerDescriptionModel);
   }
@@ -478,6 +545,10 @@ class _$_IncomingVideoCall implements _IncomingVideoCall {
     TResult? Function(MessageModel message)? message,
     TResult? Function(CallerDescriptionModel callerDescriptionModel)?
         incomingVideoCall,
+    TResult? Function(CallerDescriptionModel receiverDescriptionModel)?
+        acceptedVideoCall,
+    TResult? Function()? rejectedVideoCall,
+    TResult? Function()? endedVideoCall,
   }) {
     return incomingVideoCall?.call(callerDescriptionModel);
   }
@@ -489,6 +560,10 @@ class _$_IncomingVideoCall implements _IncomingVideoCall {
     TResult Function(MessageModel message)? message,
     TResult Function(CallerDescriptionModel callerDescriptionModel)?
         incomingVideoCall,
+    TResult Function(CallerDescriptionModel receiverDescriptionModel)?
+        acceptedVideoCall,
+    TResult Function()? rejectedVideoCall,
+    TResult Function()? endedVideoCall,
     required TResult orElse(),
   }) {
     if (incomingVideoCall != null) {
@@ -503,6 +578,9 @@ class _$_IncomingVideoCall implements _IncomingVideoCall {
     required TResult Function(_ActiveUsers value) activeUsers,
     required TResult Function(_Message value) message,
     required TResult Function(_IncomingVideoCall value) incomingVideoCall,
+    required TResult Function(_AcceptedVideoCall value) acceptedVideoCall,
+    required TResult Function(_RejectedVideoCall value) rejectedVideoCall,
+    required TResult Function(_EndedVideoCall value) endedVideoCall,
   }) {
     return incomingVideoCall(this);
   }
@@ -513,6 +591,9 @@ class _$_IncomingVideoCall implements _IncomingVideoCall {
     TResult? Function(_ActiveUsers value)? activeUsers,
     TResult? Function(_Message value)? message,
     TResult? Function(_IncomingVideoCall value)? incomingVideoCall,
+    TResult? Function(_AcceptedVideoCall value)? acceptedVideoCall,
+    TResult? Function(_RejectedVideoCall value)? rejectedVideoCall,
+    TResult? Function(_EndedVideoCall value)? endedVideoCall,
   }) {
     return incomingVideoCall?.call(this);
   }
@@ -523,6 +604,9 @@ class _$_IncomingVideoCall implements _IncomingVideoCall {
     TResult Function(_ActiveUsers value)? activeUsers,
     TResult Function(_Message value)? message,
     TResult Function(_IncomingVideoCall value)? incomingVideoCall,
+    TResult Function(_AcceptedVideoCall value)? acceptedVideoCall,
+    TResult Function(_RejectedVideoCall value)? rejectedVideoCall,
+    TResult Function(_EndedVideoCall value)? endedVideoCall,
     required TResult orElse(),
   }) {
     if (incomingVideoCall != null) {
@@ -541,4 +625,447 @@ abstract class _IncomingVideoCall implements WsDataModel {
   @JsonKey(ignore: true)
   _$$_IncomingVideoCallCopyWith<_$_IncomingVideoCall> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_AcceptedVideoCallCopyWith<$Res> {
+  factory _$$_AcceptedVideoCallCopyWith(_$_AcceptedVideoCall value,
+          $Res Function(_$_AcceptedVideoCall) then) =
+      __$$_AcceptedVideoCallCopyWithImpl<$Res>;
+  @useResult
+  $Res call({CallerDescriptionModel receiverDescriptionModel});
+
+  $CallerDescriptionModelCopyWith<$Res> get receiverDescriptionModel;
+}
+
+/// @nodoc
+class __$$_AcceptedVideoCallCopyWithImpl<$Res>
+    extends _$WsDataModelCopyWithImpl<$Res, _$_AcceptedVideoCall>
+    implements _$$_AcceptedVideoCallCopyWith<$Res> {
+  __$$_AcceptedVideoCallCopyWithImpl(
+      _$_AcceptedVideoCall _value, $Res Function(_$_AcceptedVideoCall) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? receiverDescriptionModel = null,
+  }) {
+    return _then(_$_AcceptedVideoCall(
+      receiverDescriptionModel: null == receiverDescriptionModel
+          ? _value.receiverDescriptionModel
+          : receiverDescriptionModel // ignore: cast_nullable_to_non_nullable
+              as CallerDescriptionModel,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $CallerDescriptionModelCopyWith<$Res> get receiverDescriptionModel {
+    return $CallerDescriptionModelCopyWith<$Res>(
+        _value.receiverDescriptionModel, (value) {
+      return _then(_value.copyWith(receiverDescriptionModel: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$_AcceptedVideoCall implements _AcceptedVideoCall {
+  const _$_AcceptedVideoCall({required this.receiverDescriptionModel});
+
+  @override
+  final CallerDescriptionModel receiverDescriptionModel;
+
+  @override
+  String toString() {
+    return 'WsDataModel.acceptedVideoCall(receiverDescriptionModel: $receiverDescriptionModel)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_AcceptedVideoCall &&
+            (identical(
+                    other.receiverDescriptionModel, receiverDescriptionModel) ||
+                other.receiverDescriptionModel == receiverDescriptionModel));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, receiverDescriptionModel);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_AcceptedVideoCallCopyWith<_$_AcceptedVideoCall> get copyWith =>
+      __$$_AcceptedVideoCallCopyWithImpl<_$_AcceptedVideoCall>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(UserModel user) activeUsers,
+    required TResult Function(MessageModel message) message,
+    required TResult Function(CallerDescriptionModel callerDescriptionModel)
+        incomingVideoCall,
+    required TResult Function(CallerDescriptionModel receiverDescriptionModel)
+        acceptedVideoCall,
+    required TResult Function() rejectedVideoCall,
+    required TResult Function() endedVideoCall,
+  }) {
+    return acceptedVideoCall(receiverDescriptionModel);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(UserModel user)? activeUsers,
+    TResult? Function(MessageModel message)? message,
+    TResult? Function(CallerDescriptionModel callerDescriptionModel)?
+        incomingVideoCall,
+    TResult? Function(CallerDescriptionModel receiverDescriptionModel)?
+        acceptedVideoCall,
+    TResult? Function()? rejectedVideoCall,
+    TResult? Function()? endedVideoCall,
+  }) {
+    return acceptedVideoCall?.call(receiverDescriptionModel);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(UserModel user)? activeUsers,
+    TResult Function(MessageModel message)? message,
+    TResult Function(CallerDescriptionModel callerDescriptionModel)?
+        incomingVideoCall,
+    TResult Function(CallerDescriptionModel receiverDescriptionModel)?
+        acceptedVideoCall,
+    TResult Function()? rejectedVideoCall,
+    TResult Function()? endedVideoCall,
+    required TResult orElse(),
+  }) {
+    if (acceptedVideoCall != null) {
+      return acceptedVideoCall(receiverDescriptionModel);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_ActiveUsers value) activeUsers,
+    required TResult Function(_Message value) message,
+    required TResult Function(_IncomingVideoCall value) incomingVideoCall,
+    required TResult Function(_AcceptedVideoCall value) acceptedVideoCall,
+    required TResult Function(_RejectedVideoCall value) rejectedVideoCall,
+    required TResult Function(_EndedVideoCall value) endedVideoCall,
+  }) {
+    return acceptedVideoCall(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_ActiveUsers value)? activeUsers,
+    TResult? Function(_Message value)? message,
+    TResult? Function(_IncomingVideoCall value)? incomingVideoCall,
+    TResult? Function(_AcceptedVideoCall value)? acceptedVideoCall,
+    TResult? Function(_RejectedVideoCall value)? rejectedVideoCall,
+    TResult? Function(_EndedVideoCall value)? endedVideoCall,
+  }) {
+    return acceptedVideoCall?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_ActiveUsers value)? activeUsers,
+    TResult Function(_Message value)? message,
+    TResult Function(_IncomingVideoCall value)? incomingVideoCall,
+    TResult Function(_AcceptedVideoCall value)? acceptedVideoCall,
+    TResult Function(_RejectedVideoCall value)? rejectedVideoCall,
+    TResult Function(_EndedVideoCall value)? endedVideoCall,
+    required TResult orElse(),
+  }) {
+    if (acceptedVideoCall != null) {
+      return acceptedVideoCall(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _AcceptedVideoCall implements WsDataModel {
+  const factory _AcceptedVideoCall(
+          {required final CallerDescriptionModel receiverDescriptionModel}) =
+      _$_AcceptedVideoCall;
+
+  CallerDescriptionModel get receiverDescriptionModel;
+  @JsonKey(ignore: true)
+  _$$_AcceptedVideoCallCopyWith<_$_AcceptedVideoCall> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_RejectedVideoCallCopyWith<$Res> {
+  factory _$$_RejectedVideoCallCopyWith(_$_RejectedVideoCall value,
+          $Res Function(_$_RejectedVideoCall) then) =
+      __$$_RejectedVideoCallCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_RejectedVideoCallCopyWithImpl<$Res>
+    extends _$WsDataModelCopyWithImpl<$Res, _$_RejectedVideoCall>
+    implements _$$_RejectedVideoCallCopyWith<$Res> {
+  __$$_RejectedVideoCallCopyWithImpl(
+      _$_RejectedVideoCall _value, $Res Function(_$_RejectedVideoCall) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_RejectedVideoCall implements _RejectedVideoCall {
+  const _$_RejectedVideoCall();
+
+  @override
+  String toString() {
+    return 'WsDataModel.rejectedVideoCall()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_RejectedVideoCall);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(UserModel user) activeUsers,
+    required TResult Function(MessageModel message) message,
+    required TResult Function(CallerDescriptionModel callerDescriptionModel)
+        incomingVideoCall,
+    required TResult Function(CallerDescriptionModel receiverDescriptionModel)
+        acceptedVideoCall,
+    required TResult Function() rejectedVideoCall,
+    required TResult Function() endedVideoCall,
+  }) {
+    return rejectedVideoCall();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(UserModel user)? activeUsers,
+    TResult? Function(MessageModel message)? message,
+    TResult? Function(CallerDescriptionModel callerDescriptionModel)?
+        incomingVideoCall,
+    TResult? Function(CallerDescriptionModel receiverDescriptionModel)?
+        acceptedVideoCall,
+    TResult? Function()? rejectedVideoCall,
+    TResult? Function()? endedVideoCall,
+  }) {
+    return rejectedVideoCall?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(UserModel user)? activeUsers,
+    TResult Function(MessageModel message)? message,
+    TResult Function(CallerDescriptionModel callerDescriptionModel)?
+        incomingVideoCall,
+    TResult Function(CallerDescriptionModel receiverDescriptionModel)?
+        acceptedVideoCall,
+    TResult Function()? rejectedVideoCall,
+    TResult Function()? endedVideoCall,
+    required TResult orElse(),
+  }) {
+    if (rejectedVideoCall != null) {
+      return rejectedVideoCall();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_ActiveUsers value) activeUsers,
+    required TResult Function(_Message value) message,
+    required TResult Function(_IncomingVideoCall value) incomingVideoCall,
+    required TResult Function(_AcceptedVideoCall value) acceptedVideoCall,
+    required TResult Function(_RejectedVideoCall value) rejectedVideoCall,
+    required TResult Function(_EndedVideoCall value) endedVideoCall,
+  }) {
+    return rejectedVideoCall(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_ActiveUsers value)? activeUsers,
+    TResult? Function(_Message value)? message,
+    TResult? Function(_IncomingVideoCall value)? incomingVideoCall,
+    TResult? Function(_AcceptedVideoCall value)? acceptedVideoCall,
+    TResult? Function(_RejectedVideoCall value)? rejectedVideoCall,
+    TResult? Function(_EndedVideoCall value)? endedVideoCall,
+  }) {
+    return rejectedVideoCall?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_ActiveUsers value)? activeUsers,
+    TResult Function(_Message value)? message,
+    TResult Function(_IncomingVideoCall value)? incomingVideoCall,
+    TResult Function(_AcceptedVideoCall value)? acceptedVideoCall,
+    TResult Function(_RejectedVideoCall value)? rejectedVideoCall,
+    TResult Function(_EndedVideoCall value)? endedVideoCall,
+    required TResult orElse(),
+  }) {
+    if (rejectedVideoCall != null) {
+      return rejectedVideoCall(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _RejectedVideoCall implements WsDataModel {
+  const factory _RejectedVideoCall() = _$_RejectedVideoCall;
+}
+
+/// @nodoc
+abstract class _$$_EndedVideoCallCopyWith<$Res> {
+  factory _$$_EndedVideoCallCopyWith(
+          _$_EndedVideoCall value, $Res Function(_$_EndedVideoCall) then) =
+      __$$_EndedVideoCallCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_EndedVideoCallCopyWithImpl<$Res>
+    extends _$WsDataModelCopyWithImpl<$Res, _$_EndedVideoCall>
+    implements _$$_EndedVideoCallCopyWith<$Res> {
+  __$$_EndedVideoCallCopyWithImpl(
+      _$_EndedVideoCall _value, $Res Function(_$_EndedVideoCall) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_EndedVideoCall implements _EndedVideoCall {
+  const _$_EndedVideoCall();
+
+  @override
+  String toString() {
+    return 'WsDataModel.endedVideoCall()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_EndedVideoCall);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(UserModel user) activeUsers,
+    required TResult Function(MessageModel message) message,
+    required TResult Function(CallerDescriptionModel callerDescriptionModel)
+        incomingVideoCall,
+    required TResult Function(CallerDescriptionModel receiverDescriptionModel)
+        acceptedVideoCall,
+    required TResult Function() rejectedVideoCall,
+    required TResult Function() endedVideoCall,
+  }) {
+    return endedVideoCall();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(UserModel user)? activeUsers,
+    TResult? Function(MessageModel message)? message,
+    TResult? Function(CallerDescriptionModel callerDescriptionModel)?
+        incomingVideoCall,
+    TResult? Function(CallerDescriptionModel receiverDescriptionModel)?
+        acceptedVideoCall,
+    TResult? Function()? rejectedVideoCall,
+    TResult? Function()? endedVideoCall,
+  }) {
+    return endedVideoCall?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(UserModel user)? activeUsers,
+    TResult Function(MessageModel message)? message,
+    TResult Function(CallerDescriptionModel callerDescriptionModel)?
+        incomingVideoCall,
+    TResult Function(CallerDescriptionModel receiverDescriptionModel)?
+        acceptedVideoCall,
+    TResult Function()? rejectedVideoCall,
+    TResult Function()? endedVideoCall,
+    required TResult orElse(),
+  }) {
+    if (endedVideoCall != null) {
+      return endedVideoCall();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_ActiveUsers value) activeUsers,
+    required TResult Function(_Message value) message,
+    required TResult Function(_IncomingVideoCall value) incomingVideoCall,
+    required TResult Function(_AcceptedVideoCall value) acceptedVideoCall,
+    required TResult Function(_RejectedVideoCall value) rejectedVideoCall,
+    required TResult Function(_EndedVideoCall value) endedVideoCall,
+  }) {
+    return endedVideoCall(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_ActiveUsers value)? activeUsers,
+    TResult? Function(_Message value)? message,
+    TResult? Function(_IncomingVideoCall value)? incomingVideoCall,
+    TResult? Function(_AcceptedVideoCall value)? acceptedVideoCall,
+    TResult? Function(_RejectedVideoCall value)? rejectedVideoCall,
+    TResult? Function(_EndedVideoCall value)? endedVideoCall,
+  }) {
+    return endedVideoCall?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_ActiveUsers value)? activeUsers,
+    TResult Function(_Message value)? message,
+    TResult Function(_IncomingVideoCall value)? incomingVideoCall,
+    TResult Function(_AcceptedVideoCall value)? acceptedVideoCall,
+    TResult Function(_RejectedVideoCall value)? rejectedVideoCall,
+    TResult Function(_EndedVideoCall value)? endedVideoCall,
+    required TResult orElse(),
+  }) {
+    if (endedVideoCall != null) {
+      return endedVideoCall(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _EndedVideoCall implements WsDataModel {
+  const factory _EndedVideoCall() = _$_EndedVideoCall;
 }

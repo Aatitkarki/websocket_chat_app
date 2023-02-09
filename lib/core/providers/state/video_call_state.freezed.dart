@@ -23,8 +23,10 @@ mixin _$VideoCallState {
         startedVideoCall,
     required TResult Function(CallerDescriptionModel callerDescriptionModel)
         incomingVideoCall,
-    required TResult Function() videoCallAccepted,
+    required TResult Function(CallerDescriptionModel receiverDescriptionModel)
+        videoCallAccepted,
     required TResult Function() videoCallEnded,
+    required TResult Function() videoCallRejected,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -34,8 +36,10 @@ mixin _$VideoCallState {
         startedVideoCall,
     TResult? Function(CallerDescriptionModel callerDescriptionModel)?
         incomingVideoCall,
-    TResult? Function()? videoCallAccepted,
+    TResult? Function(CallerDescriptionModel receiverDescriptionModel)?
+        videoCallAccepted,
     TResult? Function()? videoCallEnded,
+    TResult? Function()? videoCallRejected,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -45,8 +49,10 @@ mixin _$VideoCallState {
         startedVideoCall,
     TResult Function(CallerDescriptionModel callerDescriptionModel)?
         incomingVideoCall,
-    TResult Function()? videoCallAccepted,
+    TResult Function(CallerDescriptionModel receiverDescriptionModel)?
+        videoCallAccepted,
     TResult Function()? videoCallEnded,
+    TResult Function()? videoCallRejected,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -57,6 +63,7 @@ mixin _$VideoCallState {
     required TResult Function(_IncomingVideoCall value) incomingVideoCall,
     required TResult Function(_VideoCallAccepted value) videoCallAccepted,
     required TResult Function(_VideoCallEnded value) videoCallEnded,
+    required TResult Function(_VideoCallRejected value) videoCallRejected,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -66,6 +73,7 @@ mixin _$VideoCallState {
     TResult? Function(_IncomingVideoCall value)? incomingVideoCall,
     TResult? Function(_VideoCallAccepted value)? videoCallAccepted,
     TResult? Function(_VideoCallEnded value)? videoCallEnded,
+    TResult? Function(_VideoCallRejected value)? videoCallRejected,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -75,6 +83,7 @@ mixin _$VideoCallState {
     TResult Function(_IncomingVideoCall value)? incomingVideoCall,
     TResult Function(_VideoCallAccepted value)? videoCallAccepted,
     TResult Function(_VideoCallEnded value)? videoCallEnded,
+    TResult Function(_VideoCallRejected value)? videoCallRejected,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -140,8 +149,10 @@ class _$_Initial implements _Initial {
         startedVideoCall,
     required TResult Function(CallerDescriptionModel callerDescriptionModel)
         incomingVideoCall,
-    required TResult Function() videoCallAccepted,
+    required TResult Function(CallerDescriptionModel receiverDescriptionModel)
+        videoCallAccepted,
     required TResult Function() videoCallEnded,
+    required TResult Function() videoCallRejected,
   }) {
     return initial();
   }
@@ -154,8 +165,10 @@ class _$_Initial implements _Initial {
         startedVideoCall,
     TResult? Function(CallerDescriptionModel callerDescriptionModel)?
         incomingVideoCall,
-    TResult? Function()? videoCallAccepted,
+    TResult? Function(CallerDescriptionModel receiverDescriptionModel)?
+        videoCallAccepted,
     TResult? Function()? videoCallEnded,
+    TResult? Function()? videoCallRejected,
   }) {
     return initial?.call();
   }
@@ -168,8 +181,10 @@ class _$_Initial implements _Initial {
         startedVideoCall,
     TResult Function(CallerDescriptionModel callerDescriptionModel)?
         incomingVideoCall,
-    TResult Function()? videoCallAccepted,
+    TResult Function(CallerDescriptionModel receiverDescriptionModel)?
+        videoCallAccepted,
     TResult Function()? videoCallEnded,
+    TResult Function()? videoCallRejected,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -186,6 +201,7 @@ class _$_Initial implements _Initial {
     required TResult Function(_IncomingVideoCall value) incomingVideoCall,
     required TResult Function(_VideoCallAccepted value) videoCallAccepted,
     required TResult Function(_VideoCallEnded value) videoCallEnded,
+    required TResult Function(_VideoCallRejected value) videoCallRejected,
   }) {
     return initial(this);
   }
@@ -198,6 +214,7 @@ class _$_Initial implements _Initial {
     TResult? Function(_IncomingVideoCall value)? incomingVideoCall,
     TResult? Function(_VideoCallAccepted value)? videoCallAccepted,
     TResult? Function(_VideoCallEnded value)? videoCallEnded,
+    TResult? Function(_VideoCallRejected value)? videoCallRejected,
   }) {
     return initial?.call(this);
   }
@@ -210,6 +227,7 @@ class _$_Initial implements _Initial {
     TResult Function(_IncomingVideoCall value)? incomingVideoCall,
     TResult Function(_VideoCallAccepted value)? videoCallAccepted,
     TResult Function(_VideoCallEnded value)? videoCallEnded,
+    TResult Function(_VideoCallRejected value)? videoCallRejected,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -304,8 +322,10 @@ class _$_StartedVideoCall implements _StartedVideoCall {
         startedVideoCall,
     required TResult Function(CallerDescriptionModel callerDescriptionModel)
         incomingVideoCall,
-    required TResult Function() videoCallAccepted,
+    required TResult Function(CallerDescriptionModel receiverDescriptionModel)
+        videoCallAccepted,
     required TResult Function() videoCallEnded,
+    required TResult Function() videoCallRejected,
   }) {
     return startedVideoCall(callerDescriptionModel);
   }
@@ -318,8 +338,10 @@ class _$_StartedVideoCall implements _StartedVideoCall {
         startedVideoCall,
     TResult? Function(CallerDescriptionModel callerDescriptionModel)?
         incomingVideoCall,
-    TResult? Function()? videoCallAccepted,
+    TResult? Function(CallerDescriptionModel receiverDescriptionModel)?
+        videoCallAccepted,
     TResult? Function()? videoCallEnded,
+    TResult? Function()? videoCallRejected,
   }) {
     return startedVideoCall?.call(callerDescriptionModel);
   }
@@ -332,8 +354,10 @@ class _$_StartedVideoCall implements _StartedVideoCall {
         startedVideoCall,
     TResult Function(CallerDescriptionModel callerDescriptionModel)?
         incomingVideoCall,
-    TResult Function()? videoCallAccepted,
+    TResult Function(CallerDescriptionModel receiverDescriptionModel)?
+        videoCallAccepted,
     TResult Function()? videoCallEnded,
+    TResult Function()? videoCallRejected,
     required TResult orElse(),
   }) {
     if (startedVideoCall != null) {
@@ -350,6 +374,7 @@ class _$_StartedVideoCall implements _StartedVideoCall {
     required TResult Function(_IncomingVideoCall value) incomingVideoCall,
     required TResult Function(_VideoCallAccepted value) videoCallAccepted,
     required TResult Function(_VideoCallEnded value) videoCallEnded,
+    required TResult Function(_VideoCallRejected value) videoCallRejected,
   }) {
     return startedVideoCall(this);
   }
@@ -362,6 +387,7 @@ class _$_StartedVideoCall implements _StartedVideoCall {
     TResult? Function(_IncomingVideoCall value)? incomingVideoCall,
     TResult? Function(_VideoCallAccepted value)? videoCallAccepted,
     TResult? Function(_VideoCallEnded value)? videoCallEnded,
+    TResult? Function(_VideoCallRejected value)? videoCallRejected,
   }) {
     return startedVideoCall?.call(this);
   }
@@ -374,6 +400,7 @@ class _$_StartedVideoCall implements _StartedVideoCall {
     TResult Function(_IncomingVideoCall value)? incomingVideoCall,
     TResult Function(_VideoCallAccepted value)? videoCallAccepted,
     TResult Function(_VideoCallEnded value)? videoCallEnded,
+    TResult Function(_VideoCallRejected value)? videoCallRejected,
     required TResult orElse(),
   }) {
     if (startedVideoCall != null) {
@@ -476,8 +503,10 @@ class _$_IncomingVideoCall implements _IncomingVideoCall {
         startedVideoCall,
     required TResult Function(CallerDescriptionModel callerDescriptionModel)
         incomingVideoCall,
-    required TResult Function() videoCallAccepted,
+    required TResult Function(CallerDescriptionModel receiverDescriptionModel)
+        videoCallAccepted,
     required TResult Function() videoCallEnded,
+    required TResult Function() videoCallRejected,
   }) {
     return incomingVideoCall(callerDescriptionModel);
   }
@@ -490,8 +519,10 @@ class _$_IncomingVideoCall implements _IncomingVideoCall {
         startedVideoCall,
     TResult? Function(CallerDescriptionModel callerDescriptionModel)?
         incomingVideoCall,
-    TResult? Function()? videoCallAccepted,
+    TResult? Function(CallerDescriptionModel receiverDescriptionModel)?
+        videoCallAccepted,
     TResult? Function()? videoCallEnded,
+    TResult? Function()? videoCallRejected,
   }) {
     return incomingVideoCall?.call(callerDescriptionModel);
   }
@@ -504,8 +535,10 @@ class _$_IncomingVideoCall implements _IncomingVideoCall {
         startedVideoCall,
     TResult Function(CallerDescriptionModel callerDescriptionModel)?
         incomingVideoCall,
-    TResult Function()? videoCallAccepted,
+    TResult Function(CallerDescriptionModel receiverDescriptionModel)?
+        videoCallAccepted,
     TResult Function()? videoCallEnded,
+    TResult Function()? videoCallRejected,
     required TResult orElse(),
   }) {
     if (incomingVideoCall != null) {
@@ -522,6 +555,7 @@ class _$_IncomingVideoCall implements _IncomingVideoCall {
     required TResult Function(_IncomingVideoCall value) incomingVideoCall,
     required TResult Function(_VideoCallAccepted value) videoCallAccepted,
     required TResult Function(_VideoCallEnded value) videoCallEnded,
+    required TResult Function(_VideoCallRejected value) videoCallRejected,
   }) {
     return incomingVideoCall(this);
   }
@@ -534,6 +568,7 @@ class _$_IncomingVideoCall implements _IncomingVideoCall {
     TResult? Function(_IncomingVideoCall value)? incomingVideoCall,
     TResult? Function(_VideoCallAccepted value)? videoCallAccepted,
     TResult? Function(_VideoCallEnded value)? videoCallEnded,
+    TResult? Function(_VideoCallRejected value)? videoCallRejected,
   }) {
     return incomingVideoCall?.call(this);
   }
@@ -546,6 +581,7 @@ class _$_IncomingVideoCall implements _IncomingVideoCall {
     TResult Function(_IncomingVideoCall value)? incomingVideoCall,
     TResult Function(_VideoCallAccepted value)? videoCallAccepted,
     TResult Function(_VideoCallEnded value)? videoCallEnded,
+    TResult Function(_VideoCallRejected value)? videoCallRejected,
     required TResult orElse(),
   }) {
     if (incomingVideoCall != null) {
@@ -571,6 +607,10 @@ abstract class _$$_VideoCallAcceptedCopyWith<$Res> {
   factory _$$_VideoCallAcceptedCopyWith(_$_VideoCallAccepted value,
           $Res Function(_$_VideoCallAccepted) then) =
       __$$_VideoCallAcceptedCopyWithImpl<$Res>;
+  @useResult
+  $Res call({CallerDescriptionModel receiverDescriptionModel});
+
+  $CallerDescriptionModelCopyWith<$Res> get receiverDescriptionModel;
 }
 
 /// @nodoc
@@ -580,26 +620,62 @@ class __$$_VideoCallAcceptedCopyWithImpl<$Res>
   __$$_VideoCallAcceptedCopyWithImpl(
       _$_VideoCallAccepted _value, $Res Function(_$_VideoCallAccepted) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? receiverDescriptionModel = null,
+  }) {
+    return _then(_$_VideoCallAccepted(
+      receiverDescriptionModel: null == receiverDescriptionModel
+          ? _value.receiverDescriptionModel
+          : receiverDescriptionModel // ignore: cast_nullable_to_non_nullable
+              as CallerDescriptionModel,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $CallerDescriptionModelCopyWith<$Res> get receiverDescriptionModel {
+    return $CallerDescriptionModelCopyWith<$Res>(
+        _value.receiverDescriptionModel, (value) {
+      return _then(_value.copyWith(receiverDescriptionModel: value));
+    });
+  }
 }
 
 /// @nodoc
 
 class _$_VideoCallAccepted implements _VideoCallAccepted {
-  const _$_VideoCallAccepted();
+  const _$_VideoCallAccepted({required this.receiverDescriptionModel});
+
+  @override
+  final CallerDescriptionModel receiverDescriptionModel;
 
   @override
   String toString() {
-    return 'VideoCallState.videoCallAccepted()';
+    return 'VideoCallState.videoCallAccepted(receiverDescriptionModel: $receiverDescriptionModel)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_VideoCallAccepted);
+        (other.runtimeType == runtimeType &&
+            other is _$_VideoCallAccepted &&
+            (identical(
+                    other.receiverDescriptionModel, receiverDescriptionModel) ||
+                other.receiverDescriptionModel == receiverDescriptionModel));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, receiverDescriptionModel);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_VideoCallAcceptedCopyWith<_$_VideoCallAccepted> get copyWith =>
+      __$$_VideoCallAcceptedCopyWithImpl<_$_VideoCallAccepted>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -609,10 +685,12 @@ class _$_VideoCallAccepted implements _VideoCallAccepted {
         startedVideoCall,
     required TResult Function(CallerDescriptionModel callerDescriptionModel)
         incomingVideoCall,
-    required TResult Function() videoCallAccepted,
+    required TResult Function(CallerDescriptionModel receiverDescriptionModel)
+        videoCallAccepted,
     required TResult Function() videoCallEnded,
+    required TResult Function() videoCallRejected,
   }) {
-    return videoCallAccepted();
+    return videoCallAccepted(receiverDescriptionModel);
   }
 
   @override
@@ -623,10 +701,12 @@ class _$_VideoCallAccepted implements _VideoCallAccepted {
         startedVideoCall,
     TResult? Function(CallerDescriptionModel callerDescriptionModel)?
         incomingVideoCall,
-    TResult? Function()? videoCallAccepted,
+    TResult? Function(CallerDescriptionModel receiverDescriptionModel)?
+        videoCallAccepted,
     TResult? Function()? videoCallEnded,
+    TResult? Function()? videoCallRejected,
   }) {
-    return videoCallAccepted?.call();
+    return videoCallAccepted?.call(receiverDescriptionModel);
   }
 
   @override
@@ -637,12 +717,14 @@ class _$_VideoCallAccepted implements _VideoCallAccepted {
         startedVideoCall,
     TResult Function(CallerDescriptionModel callerDescriptionModel)?
         incomingVideoCall,
-    TResult Function()? videoCallAccepted,
+    TResult Function(CallerDescriptionModel receiverDescriptionModel)?
+        videoCallAccepted,
     TResult Function()? videoCallEnded,
+    TResult Function()? videoCallRejected,
     required TResult orElse(),
   }) {
     if (videoCallAccepted != null) {
-      return videoCallAccepted();
+      return videoCallAccepted(receiverDescriptionModel);
     }
     return orElse();
   }
@@ -655,6 +737,7 @@ class _$_VideoCallAccepted implements _VideoCallAccepted {
     required TResult Function(_IncomingVideoCall value) incomingVideoCall,
     required TResult Function(_VideoCallAccepted value) videoCallAccepted,
     required TResult Function(_VideoCallEnded value) videoCallEnded,
+    required TResult Function(_VideoCallRejected value) videoCallRejected,
   }) {
     return videoCallAccepted(this);
   }
@@ -667,6 +750,7 @@ class _$_VideoCallAccepted implements _VideoCallAccepted {
     TResult? Function(_IncomingVideoCall value)? incomingVideoCall,
     TResult? Function(_VideoCallAccepted value)? videoCallAccepted,
     TResult? Function(_VideoCallEnded value)? videoCallEnded,
+    TResult? Function(_VideoCallRejected value)? videoCallRejected,
   }) {
     return videoCallAccepted?.call(this);
   }
@@ -679,6 +763,7 @@ class _$_VideoCallAccepted implements _VideoCallAccepted {
     TResult Function(_IncomingVideoCall value)? incomingVideoCall,
     TResult Function(_VideoCallAccepted value)? videoCallAccepted,
     TResult Function(_VideoCallEnded value)? videoCallEnded,
+    TResult Function(_VideoCallRejected value)? videoCallRejected,
     required TResult orElse(),
   }) {
     if (videoCallAccepted != null) {
@@ -689,7 +774,14 @@ class _$_VideoCallAccepted implements _VideoCallAccepted {
 }
 
 abstract class _VideoCallAccepted implements VideoCallState {
-  const factory _VideoCallAccepted() = _$_VideoCallAccepted;
+  const factory _VideoCallAccepted(
+          {required final CallerDescriptionModel receiverDescriptionModel}) =
+      _$_VideoCallAccepted;
+
+  CallerDescriptionModel get receiverDescriptionModel;
+  @JsonKey(ignore: true)
+  _$$_VideoCallAcceptedCopyWith<_$_VideoCallAccepted> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -735,8 +827,10 @@ class _$_VideoCallEnded implements _VideoCallEnded {
         startedVideoCall,
     required TResult Function(CallerDescriptionModel callerDescriptionModel)
         incomingVideoCall,
-    required TResult Function() videoCallAccepted,
+    required TResult Function(CallerDescriptionModel receiverDescriptionModel)
+        videoCallAccepted,
     required TResult Function() videoCallEnded,
+    required TResult Function() videoCallRejected,
   }) {
     return videoCallEnded();
   }
@@ -749,8 +843,10 @@ class _$_VideoCallEnded implements _VideoCallEnded {
         startedVideoCall,
     TResult? Function(CallerDescriptionModel callerDescriptionModel)?
         incomingVideoCall,
-    TResult? Function()? videoCallAccepted,
+    TResult? Function(CallerDescriptionModel receiverDescriptionModel)?
+        videoCallAccepted,
     TResult? Function()? videoCallEnded,
+    TResult? Function()? videoCallRejected,
   }) {
     return videoCallEnded?.call();
   }
@@ -763,8 +859,10 @@ class _$_VideoCallEnded implements _VideoCallEnded {
         startedVideoCall,
     TResult Function(CallerDescriptionModel callerDescriptionModel)?
         incomingVideoCall,
-    TResult Function()? videoCallAccepted,
+    TResult Function(CallerDescriptionModel receiverDescriptionModel)?
+        videoCallAccepted,
     TResult Function()? videoCallEnded,
+    TResult Function()? videoCallRejected,
     required TResult orElse(),
   }) {
     if (videoCallEnded != null) {
@@ -781,6 +879,7 @@ class _$_VideoCallEnded implements _VideoCallEnded {
     required TResult Function(_IncomingVideoCall value) incomingVideoCall,
     required TResult Function(_VideoCallAccepted value) videoCallAccepted,
     required TResult Function(_VideoCallEnded value) videoCallEnded,
+    required TResult Function(_VideoCallRejected value) videoCallRejected,
   }) {
     return videoCallEnded(this);
   }
@@ -793,6 +892,7 @@ class _$_VideoCallEnded implements _VideoCallEnded {
     TResult? Function(_IncomingVideoCall value)? incomingVideoCall,
     TResult? Function(_VideoCallAccepted value)? videoCallAccepted,
     TResult? Function(_VideoCallEnded value)? videoCallEnded,
+    TResult? Function(_VideoCallRejected value)? videoCallRejected,
   }) {
     return videoCallEnded?.call(this);
   }
@@ -805,6 +905,7 @@ class _$_VideoCallEnded implements _VideoCallEnded {
     TResult Function(_IncomingVideoCall value)? incomingVideoCall,
     TResult Function(_VideoCallAccepted value)? videoCallAccepted,
     TResult Function(_VideoCallEnded value)? videoCallEnded,
+    TResult Function(_VideoCallRejected value)? videoCallRejected,
     required TResult orElse(),
   }) {
     if (videoCallEnded != null) {
@@ -816,4 +917,139 @@ class _$_VideoCallEnded implements _VideoCallEnded {
 
 abstract class _VideoCallEnded implements VideoCallState {
   const factory _VideoCallEnded() = _$_VideoCallEnded;
+}
+
+/// @nodoc
+abstract class _$$_VideoCallRejectedCopyWith<$Res> {
+  factory _$$_VideoCallRejectedCopyWith(_$_VideoCallRejected value,
+          $Res Function(_$_VideoCallRejected) then) =
+      __$$_VideoCallRejectedCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_VideoCallRejectedCopyWithImpl<$Res>
+    extends _$VideoCallStateCopyWithImpl<$Res, _$_VideoCallRejected>
+    implements _$$_VideoCallRejectedCopyWith<$Res> {
+  __$$_VideoCallRejectedCopyWithImpl(
+      _$_VideoCallRejected _value, $Res Function(_$_VideoCallRejected) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_VideoCallRejected implements _VideoCallRejected {
+  const _$_VideoCallRejected();
+
+  @override
+  String toString() {
+    return 'VideoCallState.videoCallRejected()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_VideoCallRejected);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function(CallerDescriptionModel callerDescriptionModel)
+        startedVideoCall,
+    required TResult Function(CallerDescriptionModel callerDescriptionModel)
+        incomingVideoCall,
+    required TResult Function(CallerDescriptionModel receiverDescriptionModel)
+        videoCallAccepted,
+    required TResult Function() videoCallEnded,
+    required TResult Function() videoCallRejected,
+  }) {
+    return videoCallRejected();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function(CallerDescriptionModel callerDescriptionModel)?
+        startedVideoCall,
+    TResult? Function(CallerDescriptionModel callerDescriptionModel)?
+        incomingVideoCall,
+    TResult? Function(CallerDescriptionModel receiverDescriptionModel)?
+        videoCallAccepted,
+    TResult? Function()? videoCallEnded,
+    TResult? Function()? videoCallRejected,
+  }) {
+    return videoCallRejected?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function(CallerDescriptionModel callerDescriptionModel)?
+        startedVideoCall,
+    TResult Function(CallerDescriptionModel callerDescriptionModel)?
+        incomingVideoCall,
+    TResult Function(CallerDescriptionModel receiverDescriptionModel)?
+        videoCallAccepted,
+    TResult Function()? videoCallEnded,
+    TResult Function()? videoCallRejected,
+    required TResult orElse(),
+  }) {
+    if (videoCallRejected != null) {
+      return videoCallRejected();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_StartedVideoCall value) startedVideoCall,
+    required TResult Function(_IncomingVideoCall value) incomingVideoCall,
+    required TResult Function(_VideoCallAccepted value) videoCallAccepted,
+    required TResult Function(_VideoCallEnded value) videoCallEnded,
+    required TResult Function(_VideoCallRejected value) videoCallRejected,
+  }) {
+    return videoCallRejected(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_StartedVideoCall value)? startedVideoCall,
+    TResult? Function(_IncomingVideoCall value)? incomingVideoCall,
+    TResult? Function(_VideoCallAccepted value)? videoCallAccepted,
+    TResult? Function(_VideoCallEnded value)? videoCallEnded,
+    TResult? Function(_VideoCallRejected value)? videoCallRejected,
+  }) {
+    return videoCallRejected?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_StartedVideoCall value)? startedVideoCall,
+    TResult Function(_IncomingVideoCall value)? incomingVideoCall,
+    TResult Function(_VideoCallAccepted value)? videoCallAccepted,
+    TResult Function(_VideoCallEnded value)? videoCallEnded,
+    TResult Function(_VideoCallRejected value)? videoCallRejected,
+    required TResult orElse(),
+  }) {
+    if (videoCallRejected != null) {
+      return videoCallRejected(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _VideoCallRejected implements VideoCallState {
+  const factory _VideoCallRejected() = _$_VideoCallRejected;
 }

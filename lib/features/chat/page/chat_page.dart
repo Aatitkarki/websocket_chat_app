@@ -1,6 +1,9 @@
 import 'package:adaptive_sizer/adaptive_sizer.dart';
+import 'package:auto_route/auto_route.dart';
+import 'package:chat_app/core/providers/active_users_data_provider.dart';
 import 'package:chat_app/core/providers/message_providers.dart';
 import 'package:chat_app/core/providers/registeration_provider.dart';
+import 'package:chat_app/core/routes/app_router.dart';
 import 'package:chat_app/core/service/web_socket_service.dart';
 import 'package:chat_app/core/widgets/app_error_widget.dart';
 import 'package:chat_app/models/message.dart';
@@ -23,7 +26,13 @@ class ChatPage extends ConsumerWidget {
         backgroundColor: Colors.blue[800],
         elevation: 0,
         actions: [
-          IconButton(onPressed: () {}, icon: const Icon(Icons.video_call))
+          IconButton(
+              onPressed: () {
+                context.router.push(VideoCallRoute(
+                  user: receiverModel,
+                ));
+              },
+              icon: const Icon(Icons.video_call))
         ],
       ),
       body: Column(

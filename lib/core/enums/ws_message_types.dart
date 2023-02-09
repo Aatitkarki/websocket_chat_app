@@ -5,6 +5,7 @@ enum WSMessageType {
   sendText('textMessage'),
   videoCallStarted('videoCallStarted'),
   videoCallAccepted('videoCallAccepted'),
+  videoCallRejected('videoCallRejected'),
   videoCallEnded('videoCallEnded');
 
   const WSMessageType(this.value);

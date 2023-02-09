@@ -9,7 +9,7 @@ class CallerDescriptionModel with _$CallerDescriptionModel {
     required String receiverId,
     required String callerId,
     required String callerName,
-    required Map<String, dynamic> sdp,
+    required String sdp,
   }) = _CallerDescriptionModel;
   factory CallerDescriptionModel.fromJson(Map<String, dynamic> json) =>
       _$CallerDescriptionModelFromJson(json);

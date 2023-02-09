@@ -12,6 +12,10 @@ class VideoCallState with _$VideoCallState {
   const factory VideoCallState.incomingVideoCall(
           {required CallerDescriptionModel callerDescriptionModel}) =
       _IncomingVideoCall;
-  const factory VideoCallState.videoCallAccepted() = _VideoCallAccepted;
+  const factory VideoCallState.videoCallAccepted(
+          {required CallerDescriptionModel receiverDescriptionModel}) =
+      _VideoCallAccepted;
   const factory VideoCallState.videoCallEnded() = _VideoCallEnded;
+
+  const factory VideoCallState.videoCallRejected() = _VideoCallRejected;
 }

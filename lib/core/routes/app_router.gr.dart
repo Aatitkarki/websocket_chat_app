@@ -42,12 +42,13 @@ class AppRouter extends _i4.RootStackRouter {
       );
     },
     VideoCallRoute.name: (routeData) {
-      final args = routeData.argsAs<VideoCallRouteArgs>();
+      final args = routeData.argsAs<VideoCallRouteArgs>(
+          orElse: () => const VideoCallRouteArgs());
       return _i4.AdaptivePage<dynamic>(
         routeData: routeData,
         child: _i3.VideoCallPage(
-          args.incomingCallerDesModel,
-          receiverId: args.receiverId,
+          user: args.user,
+          incomingCallerDesModel: args.incomingCallerDesModel,
           isCaller: args.isCaller,
           key: args.key,
         ),
@@ -60,7 +61,7 @@ class AppRouter extends _i4.RootStackRouter {
         _i4.RouteConfig(
           '/#redirect',
           path: '/',
-          redirectTo: '/videoCall',
+          redirectTo: '/home',
           fullMatch: true,
         ),
         _i4.RouteConfig(
@@ -128,16 +129,16 @@ class ChatRouteArgs {
 /// [_i3.VideoCallPage]
 class VideoCallRoute extends _i4.PageRouteInfo<VideoCallRouteArgs> {
   VideoCallRoute({
-    required _i7.CallerDescriptionModel incomingCallerDesModel,
-    String? receiverId,
+    _i6.UserModel? user,
+    _i7.CallerDescriptionModel? incomingCallerDesModel,
     bool isCaller = true,
     _i5.Key? key,
   }) : super(
           VideoCallRoute.name,
           path: '/videoCall',
           args: VideoCallRouteArgs(
+            user: user,
             incomingCallerDesModel: incomingCallerDesModel,
-            receiverId: receiverId,
             isCaller: isCaller,
             key: key,
           ),
@@ -148,15 +149,15 @@ class VideoCallRoute extends _i4.PageRouteInfo<VideoCallRouteArgs> {
 
 class VideoCallRouteArgs {
   const VideoCallRouteArgs({
-    required this.incomingCallerDesModel,
-    this.receiverId,
+    this.user,
+    this.incomingCallerDesModel,
     this.isCaller = true,
     this.key,
   });
 
-  final _i7.CallerDescriptionModel incomingCallerDesModel;
+  final _i6.UserModel? user;
 
-  final String? receiverId;
+  final _i7.CallerDescriptionModel? incomingCallerDesModel;
 
   final bool isCaller;
 
@@ -164,6 +165,6 @@ class VideoCallRouteArgs {
 
   @override
   String toString() {
-    return 'VideoCallRouteArgs{incomingCallerDesModel: $incomingCallerDesModel, receiverId: $receiverId, isCaller: $isCaller, key: $key}';
+    return 'VideoCallRouteArgs{user: $user, incomingCallerDesModel: $incomingCallerDesModel, isCaller: $isCaller, key: $key}';
   }
 }

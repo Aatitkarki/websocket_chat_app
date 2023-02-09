@@ -22,15 +22,30 @@ class VideoDataProvider extends StateNotifier<VideoCallState> {
     ref.listen(socketService, (previous, next) {
       final data = next.value;
       if (data != null) {
-        data.whenOrNull(incomingVideoCall: (callerDescriptionModel) {
-          state = VideoCallState.incomingVideoCall(
-              callerDescriptionModel: callerDescriptionModel);
-        });
+        data.whenOrNull(
+            incomingVideoCall: (callerDescriptionModel) {
+              state = VideoCallState.incomingVideoCall(
+                  callerDescriptionModel: callerDescriptionModel);
+            },
+            rejectedVideoCall: () =>
+                state = const VideoCallState.videoCallRejected(),
+            endedVideoCall: () => state = const VideoCallState.videoCallEnded(),
+            acceptedVideoCall: (receiverDescriptionModel) => state =
+                VideoCallState.videoCallAccepted(
+                    receiverDescriptionModel: receiverDescriptionModel));
       }
     });
   }
 
   void startVideoCall(CallerDescriptionModel callerDescriptionModel) {
     _socketServices.startVideoCall(callerDescriptionModel);
+  }
+
+  void acceptCall(CallerDescriptionModel receiverDescriptionModel) {
+    _socketServices.acceptVideoCall(receiverDescriptionModel);
+  }
+
+  void rejectCall(String callerId) {
+    _socketServices.rejectCall(callerId);
   }
 }

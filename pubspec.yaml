@@ -49,7 +49,7 @@ dependencies:
   uuid: ^3.0.7
   shared_preferences: ^2.0.17
   freezed: ^2.3.2
-  flutter_webrtc: ^0.9.20
+  flutter_webrtc: 0.9.19
   sdp_transform: ^0.3.2
 
 dev_dependencies:

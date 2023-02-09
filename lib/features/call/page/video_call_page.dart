@@ -1,7 +1,13 @@
 import 'dart:convert';
 
+import 'package:adaptive_sizer/adaptive_sizer.dart';
+import 'package:auto_route/auto_route.dart';
+import 'package:chat_app/core/extensions/extensions.dart';
 import 'package:chat_app/core/providers/registeration_provider.dart';
+import 'package:chat_app/core/providers/state/video_call_state.dart';
 import 'package:chat_app/core/providers/video_data_provider.dart';
+import 'package:chat_app/core/themes/app_colors.dart';
+import 'package:chat_app/core/themes/app_styles.dart';
 import 'package:chat_app/models/caller_description.dart';
 import 'package:chat_app/models/user_model.dart';
 import 'package:flutter/material.dart';
@@ -11,11 +17,14 @@ import 'package:sdp_transform/sdp_transform.dart';
 
 class VideoCallPage extends ConsumerStatefulWidget {
   final bool isCaller;
-  final String? receiverId;
-  final CallerDescriptionModel incomingCallerDesModel;
+  final UserModel? user;
+  final CallerDescriptionModel? incomingCallerDesModel;
 
-  const VideoCallPage(this.incomingCallerDesModel,
-      {this.receiverId, this.isCaller = true, super.key});
+  const VideoCallPage(
+      {this.user,
+      this.incomingCallerDesModel,
+      this.isCaller = true,
+      super.key});
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() => _VideoCallPageState();
@@ -26,7 +35,7 @@ class _VideoCallPageState extends ConsumerState<VideoCallPage> {
   final _remoteVideoRenderer = RTCVideoRenderer();
   final sdpController = TextEditingController();
 
-  bool _offer = false;
+  bool isConnected = false;
 
   RTCPeerConnection? _peerConnection;
   MediaStream? _localStream;
@@ -52,194 +61,247 @@ class _VideoCallPageState extends ConsumerState<VideoCallPage> {
   }
 
   _createPeerConnecion() async {
-    Map<String, dynamic> configuration = {
-      "iceServers": [
-        {"url": "stun:stun.l.google.com:19302"},
-      ]
-    };
+    try {
+      Map<String, dynamic> configuration = {
+        "sdpSemantics": "plan-b",
+        "iceServers": [
+          {"url": "stun:stun.l.google.com:19302"},
+        ]
+      };
 
-    final Map<String, dynamic> offerSdpConstraints = {
-      "mandatory": {
-        "OfferToReceiveAudio": true,
-        "OfferToReceiveVideo": true,
-      },
-      "optional": [],
-    };
+      final Map<String, dynamic> offerSdpConstraints = {
+        "mandatory": {
+          "OfferToReceiveAudio": true,
+          "OfferToReceiveVideo": true,
+        },
+        "optional": [],
+      };
 
-    _localStream = await _getUserMedia();
+      _localStream = await _getUserMedia();
 
-    RTCPeerConnection pc =
-        await createPeerConnection(configuration, offerSdpConstraints);
+      RTCPeerConnection pc =
+          await createPeerConnection(configuration, offerSdpConstraints);
 
-    pc.addStream(_localStream!);
-
-    pc.onIceCandidate = (e) {
-      if (e.candidate != null) {
-        print(json.encode({
-          'candidate': e.candidate.toString(),
-          'sdpMid': e.sdpMid.toString(),
-          'sdpMlineIndex': e.sdpMLineIndex,
-        }));
+      setState(() {});
+      if (_localStream != null) {
+        pc.addStream(_localStream!);
       }
-    };
+      print("hello");
 
-    pc.onIceConnectionState = (e) {
-      print(e);
-    };
+      pc.onIceCandidate = (e) {
+        if (e.candidate != null) {
+          print(json.encode({
+            'candidate': e.candidate.toString(),
+            'sdpMid': e.sdpMid.toString(),
+            'sdpMlineIndex': e.sdpMLineIndex,
+          }));
+        }
+      };
 
-    pc.onAddStream = (stream) {
-      print('addStream: ' + stream.id);
-      _remoteVideoRenderer.srcObject = stream;
-    };
+      pc.onIceConnectionState = (e) {
+        print(e);
+      };
 
-    return pc;
+      pc.onAddStream = (stream) {
+        print('addStream: ' + stream.id);
+        _remoteVideoRenderer.srcObject = stream;
+      };
+
+      return pc;
+    } catch (error) {
+      print(error);
+    }
   }
 
   void _startCall() async {
     RTCSessionDescription description =
         await _peerConnection!.createOffer({'offerToReceiveVideo': 1});
-    Map<String, dynamic> sessionDescriptionProtocol =
-        parse(description.sdp.toString());
-    _offer = true;
+    var session = parse(description.sdp.toString());
     _peerConnection!.setLocalDescription(description);
     UserModel caller = ref.read(registerationStateProvider);
     CallerDescriptionModel callerDescriptionModel = CallerDescriptionModel(
         callerId: caller.uid,
         callerName: caller.name,
-        receiverId: widget.receiverId!,
-        sdp: sessionDescriptionProtocol);
+        receiverId: widget.user!.uid,
+        sdp: jsonEncode(session));
     ref.read(videoDataProvider.notifier).startVideoCall(callerDescriptionModel);
   }
 
 //TOOD: USE ANSWER BUTTON
-  void _createAnswer() async {
+  void _answerCall() async {
     RTCSessionDescription description =
         await _peerConnection!.createAnswer({'offerToReceiveVideo': 1});
-
-    var session = parse(description.sdp.toString());
-    print(json.encode(session));
-
+    Map<String, dynamic> sdp = parse(description.sdp.toString());
+    UserModel receiver = ref.read(registerationStateProvider);
+    CallerDescriptionModel receiverDescriptionModel = CallerDescriptionModel(
+        callerId: widget.incomingCallerDesModel!.callerId,
+        callerName: widget.incomingCallerDesModel!.callerName,
+        receiverId: receiver.uid,
+        sdp: jsonEncode(sdp));
     _peerConnection!.setLocalDescription(description);
+
+    setState(() {
+      isConnected = true;
+    });
+
+    ref.read(videoDataProvider.notifier).acceptCall(receiverDescriptionModel);
   }
 
   void _setRemoteDescription() async {
-    String sdp = write(widget.incomingCallerDesModel.sdp, null);
-
-    RTCSessionDescription description =
-        RTCSessionDescription(sdp, _offer ? 'answer' : 'offer');
+    dynamic session = await jsonDecode(widget.incomingCallerDesModel!.sdp);
+    String sdp = write(session, null);
+    RTCSessionDescription description = RTCSessionDescription(sdp, 'offer');
 
     await _peerConnection!.setRemoteDescription(description);
-    // _createAnswer();
   }
 
-  void _addCandidate() async {
-    String jsonString = sdpController.text;
+  void _addCandidate(String jsonString) async {
     dynamic session = await jsonDecode(jsonString);
     print(session['candidate']);
     dynamic candidate = RTCIceCandidate(
         session['candidate'], session['sdpMid'], session['sdpMlineIndex']);
+
+    //CRASHES APP
     await _peerConnection!.addCandidate(candidate);
   }
 
   @override
   void initState() {
     initRenderer();
-    if (widget.isCaller) {
-      _createPeerConnecion().then((pc) {
-        _peerConnection = pc;
-      });
-    } else {
-      _setRemoteDescription();
-    }
-    // _getUserMedia();
+    _createPeerConnecion().then((pc) {
+      _peerConnection = pc;
+      if (widget.isCaller) {
+        _startCall();
+      } else {
+        _setRemoteDescription();
+      }
+    });
     super.initState();
   }
 
   @override
   void dispose() async {
     await _localVideoRenderer.dispose();
+    await _remoteVideoRenderer.dispose();
+    _peerConnection = null;
+    _localStream = null;
     sdpController.dispose();
     super.dispose();
   }
 
-  SizedBox videoRenderers() => SizedBox(
-        height: 210,
-        child: Row(children: [
-          Flexible(
-            child: Container(
-              key: const Key('local'),
-              margin: const EdgeInsets.fromLTRB(5.0, 5.0, 5.0, 5.0),
-              decoration: const BoxDecoration(color: Colors.black),
-              child: RTCVideoView(_localVideoRenderer),
-            ),
-          ),
-          Flexible(
-            child: Container(
-              key: const Key('remote'),
-              margin: const EdgeInsets.fromLTRB(5.0, 5.0, 5.0, 5.0),
-              decoration: const BoxDecoration(color: Colors.black),
-              child: RTCVideoView(_remoteVideoRenderer),
-            ),
-          ),
-        ]),
-      );
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text('Video Calling'),
-        ),
-        body: Column(
+        body: Container(
+      height: MediaQuery.of(context).size.height,
+      width: MediaQuery.of(context).size.width,
+      child: Consumer(builder: (_, ref, child) {
+        String callerName = '';
+        String callerId = '';
+
+        ref.watch(videoDataProvider).maybeMap(
+          orElse: () {
+            isConnected = false;
+          },
+          incomingVideoCall: (value) {
+            callerName = value.callerDescriptionModel.callerName;
+            callerId = value.callerDescriptionModel.callerId;
+          },
+          videoCallAccepted: (data) {
+            _addCandidate(data.receiverDescriptionModel.sdp);
+            isConnected = true;
+          },
+          videoCallEnded: (value) {
+            context.router.pop();
+          },
+          videoCallRejected: (value) {
+            context.router.pop();
+          },
+        );
+        return Stack(
           children: [
-            videoRenderers(),
-            Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.5,
-                    child: TextField(
-                      controller: sdpController,
-                      keyboardType: TextInputType.multiline,
-                      maxLines: 4,
-                      maxLength: TextField.noMaxLength,
-                    ),
+            if (isConnected)
+              Align(
+                alignment: Alignment.topRight,
+                child: Container(
+                  key: const Key('remote'),
+                  decoration: const BoxDecoration(color: Colors.black),
+                  child: RTCVideoView(_remoteVideoRenderer),
+                ),
+              ),
+            Align(
+              alignment: Alignment.topRight,
+              child: Container(
+                margin: EdgeInsets.symmetric(
+                    horizontal: isConnected ? 5.w : 0,
+                    vertical: isConnected ? 5.h : 0),
+                height: isConnected ? 160.h : null,
+                width: isConnected ? 120.w : null,
+                key: const Key('local'),
+                decoration: const BoxDecoration(color: Colors.black),
+                child: RTCVideoView(_localVideoRenderer),
+              ),
+            ),
+            if (!isConnected && !widget.isCaller) ...[
+              Positioned(
+                left: 0,
+                right: 0,
+                top: 30.h,
+                child: Center(
+                  child: Text(
+                    "$callerName is Calling",
+                    style: AppStyles.text24PxSemiBold.textGrey,
                   ),
                 ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    ElevatedButton(
-                      onPressed: _startCall,
-                      child: const Text("Offer"),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    ElevatedButton(
-                      onPressed: _createAnswer,
-                      child: const Text("Answer"),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    ElevatedButton(
-                      onPressed: _setRemoteDescription,
-                      child: const Text("Set Remote Description"),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    ElevatedButton(
-                      onPressed: _addCandidate,
-                      child: const Text("Set Candidate"),
-                    ),
-                  ],
-                )
-              ],
-            ),
+              ),
+              Positioned(
+                  bottom: 70.h,
+                  left: 0,
+                  right: 0,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      InkWell(
+                        onTap: () {
+                          ref
+                              .read(videoDataProvider.notifier)
+                              .rejectCall(callerId);
+                          context.router.pop();
+                        },
+                        child: CircleAvatar(
+                          backgroundColor: AppColors.textGrey,
+                          radius: 40.r,
+                          child: Center(
+                            child: Icon(
+                              Icons.phone_disabled,
+                              size: 40.r,
+                              color: AppColors.statusRed,
+                            ),
+                          ),
+                        ),
+                      ),
+                      InkWell(
+                        onTap: () {
+                          _answerCall();
+                        },
+                        child: CircleAvatar(
+                          backgroundColor: AppColors.textGrey,
+                          radius: 40.r,
+                          child: Center(
+                            child: Icon(
+                              Icons.phone_rounded,
+                              size: 40.r,
+                              color: AppColors.statusGreen,
+                            ),
+                          ),
+                        ),
+                      )
+                    ],
+                  ))
+            ]
           ],
-        ));
+        );
+      }),
+    ));
   }
 }

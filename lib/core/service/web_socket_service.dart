@@ -54,6 +54,18 @@ class WebSocketService {
         data: callerDescriptionModel.toJson()));
   }
 
+  void acceptVideoCall(CallerDescriptionModel receiverDescriptionModel) {
+    _sendWSMessage(WsRequestDataModel(
+        type: WSMessageType.videoCallAccepted.value,
+        data: receiverDescriptionModel.toJson()));
+  }
+
+  void rejectCall(String callerId) {
+    _sendWSMessage(WsRequestDataModel(
+        type: WSMessageType.videoCallRejected.value,
+        data: {'callerId': callerId}));
+  }
+
   void listenMessages() {
     _socketClient.stream.asBroadcastStream().listen((event) {
       try {
@@ -73,9 +85,15 @@ class WebSocketService {
                   CallerDescriptionModel.fromJson(wsRequestDataModel.data)));
         } else if (wsRequestDataModel.type ==
             WSMessageType.videoCallAccepted.value) {
-          socketResponse.sink.add(WsDataModel.incomingVideoCall(
-              callerDescriptionModel:
+          socketResponse.sink.add(WsDataModel.acceptedVideoCall(
+              receiverDescriptionModel:
                   CallerDescriptionModel.fromJson(wsRequestDataModel.data)));
+        } else if (wsRequestDataModel.type ==
+            WSMessageType.videoCallEnded.value) {
+          socketResponse.sink.add(const WsDataModel.endedVideoCall());
+        } else if (wsRequestDataModel.type ==
+            WSMessageType.videoCallRejected.value) {
+          socketResponse.sink.add(const WsDataModel.rejectedVideoCall());
         }
       } catch (error) {
         print("$error");

@@ -10,13 +10,12 @@ export 'app_routes.dart';
 @AdaptiveAutoRouter(
   replaceInRouteName: 'Page,Route',
   routes: [
-    AutoRoute<dynamic>(page: HomePage, path: AppRoutes.home),
+    AutoRoute<dynamic>(page: HomePage, path: AppRoutes.home, initial: true),
     AutoRoute<dynamic>(
       page: ChatPage,
       path: AppRoutes.chat,
     ),
-    AutoRoute<dynamic>(
-        page: VideoCallPage, path: AppRoutes.videoCall, initial: true),
+    AutoRoute<dynamic>(page: VideoCallPage, path: AppRoutes.videoCall),
   ],
 )
 class $AppRouter {}
